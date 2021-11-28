@@ -12,6 +12,11 @@ const Header = () => {
             <div className="container-headings">
                 <Link to='/user/0' className='link-heading'>Post Product</Link>
                 <Link to='/user/0' className='link-heading'>My account</Link>
+                <Link to={{ pathname: "/" }}>
+                    <button>
+                        Back to Gallery
+                    </button>
+                </Link>
             </div>
         </header>
     )
