@@ -1,0 +1,26 @@
+.header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #5a716a;
+}
+
+/* .header .form-search-bar {
+    width: 25%;
+} */
+
+.header .form-search-bar #input-search-bar{
+    width: 300px;
+}
+
+.header .container-headings{
+    display: flex;
+
+}
+
+.header .container-headings .link-heading{
+    padding: 0 10px;
+    text-decoration: none;
+    color: white;
+}

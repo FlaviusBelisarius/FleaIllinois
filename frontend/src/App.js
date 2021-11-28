@@ -3,8 +3,9 @@ import {
   Routes,
   Route
 } from 'react-router-dom'
-import './App.css';
-import Login from './login/Login';
+import './App.css'
+import Login from './login/Login'
+import User from './user/User'
 
 function App() {
   return (
@@ -15,9 +16,12 @@ function App() {
           <Route exact path='/' element={<Login/>} />
         </Routes>
         
+        <Routes>
+          <Route path='/user' element={<User/>} />
+        </Routes>
       </BrowserRouter>
     </div>
   );
 }
 
-export default App;
+export default App
