@@ -1,0 +1,29 @@
+.user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-user-history {
+    margin-top: 50px;
+}
+
+.link-user-tabs{
+    text-decoration: none;
+    padding: 0 10px;
+}
+
+.container-user-tabs {
+    display: flex;
+    align-items: flex-start;
+}
+
+.container-products-list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60vw;
+    padding: 10px 0;
+    border: solid;
+}
+
