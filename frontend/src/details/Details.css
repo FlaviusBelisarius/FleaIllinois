@@ -1,0 +1,16 @@
+#intro img {
+    float: left;
+}
+
+#seller-info img {
+    float: left;
+    height: 12rem;
+    width: 12rem;
+}
+
+.lead {
+    text-align: left;
+    font-size: 1rem;
+    line-height: 1.7;
+    font-family: "lora-regular", serif;
+}
