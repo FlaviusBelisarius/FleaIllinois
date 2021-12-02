@@ -1,0 +1,158 @@
+.user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-user-history {
+    margin-top: 50px;
+}
+
+.link-user-tabs{
+    text-decoration: none;
+    padding: 0 10px;
+}
+
+.container-user-tabs {
+    display: flex;
+    align-items: flex-start;
+}
+
+.container-products-list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60vw;
+    padding: 10px 0;
+    border: solid;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+      "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+.general-container {
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
+
+h1{
+text-align: center
+}
+
+.switch-bar {
+display: flex;
+justify-content: center;
+}
+
+.btn1 {
+background-color: #070707;
+border: 2px solid #0099CC;
+border-radius: 6px; 
+border: none;
+color: white;
+padding: 10px 20px;
+text-align: center;
+display: inline-block;
+font-size: 16px;
+margin: 4px 2px;
+-webkit-transition-duration: 0.4s; 
+transition-duration: 0.4s;
+cursor: pointer;
+text-decoration: none;
+}
+
+.btn1:hover {
+background-color: #008CBA;
+color: white;
+}
+
+.btn3 {
+/* float: right; */
+background-color: #070707;
+border: 2px solid #0099CC;
+border-radius: 6px; 
+border: none;
+color: white;
+padding: 10px 20px;
+text-align: center;
+/* display: inline-block; */
+font-size: 16px;
+margin: 4px 2px;
+-webkit-transition-duration: 0.4s; 
+transition-duration: 0.4s;
+cursor: pointer;
+text-decoration: none;
+justify-content: right;
+
+}
+
+.btn3:hover {
+background-color: #008CBA;
+color: white;
+}
+
+
+
+/* gallery */
+
+.genres-bar {
+display: flex;
+flex-wrap: wrap;
+flex-direction: row;
+justify-content: center;
+}
+
+.btn2 {
+background-color: #999999;
+border: 2px solid #0099CC;
+border-radius: 6px; 
+border: none;
+color: white;
+padding: 10px 20px;
+text-align: center;
+display: inline-block;
+font-size: 12px;
+margin: 4px 2px;
+-webkit-transition-duration: 0.4s; 
+transition-duration: 0.4s;
+cursor: pointer;
+text-decoration: none;
+}
+
+.btn2:hover {
+background-color: #008CBA;
+color: white;
+}
+
+.btn2:focus {
+background-color: #008CBA;
+color: white;
+}
+
+.items-container {
+display: flex;
+flex-wrap: wrap;
+flex-direction: row;
+}
+
+.item-picture {
+display: flex;
+justify-content: center;
+width: 20%;
+margin-bottom: 1%;
+margin-top: 1%;
+opacity: 1;
+}
+
+.item-picture:hover {
+opacity: 0.6;
+}
+

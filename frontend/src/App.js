@@ -7,14 +7,18 @@ import './App.css'
 import Login from './login/Login'
 import User from './user/User'
 import Details from './details/Details'
+import Gallery from './gallery/Gallery.jsx'
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <Routes>
+          <Route exact path='/' element={<Gallery/>} />
+        </Routes>
 
         <Routes>
-          <Route exact path='/login' element={<Login/>} />
+          <Route path='/login' element={<Login/>} />
         </Routes>
         
         <Routes>
