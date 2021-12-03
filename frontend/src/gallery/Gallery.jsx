@@ -23,30 +23,32 @@ class Gallery extends Component {
     getItems(){
         let newUrl;
         if (this.state.query === ""){
-          newUrl = "https://api.themoviedb.org/3/movie/popular?api_key=42268a2ba0f53ec8b8d5b28c18b3570c";
+            newUrl = "https://61aa812fbfb110001773f27b.mockapi.io/products";
         }else{
-          newUrl = `https://api.themoviedb.org/3/search/movie?query=${this.state.query}&api_key=42268a2ba0f53ec8b8d5b28c18b3570c`
+            newUrl = "https://61aa812fbfb110001773f27b.mockapi.io/products";
+            // newUrl = `https://61aa812fbfb110001773f27b.mockapi.io/products?where{"name": /${this.state.query}/}`
         }
         axios
             .get(newUrl).then(res =>
                 this.setState({
-                    items: res.data.results.sort(
-                        function(a, b) {
-                            if(this.state.sortValue === "relevant"){
-                                if(this.state.sortOrder === "ascending"){
-                                    return a.popularity - b.popularity
-                                }else{
-                                    return b.popularity - a.popularity
-                                }
-                            }else{
-                                if(this.state.sortOrder === "ascending"){
-                                    return a.vote_average - b.vote_average
-                                }else{
-                                    return b.vote_average - a.vote_average
-                                }
-                            }
-                        }.bind(this)
-                    )
+                    items: res.data
+                    // items: res.data.results.sort(
+                    //     function(a, b) {
+                    //         if(this.state.sortValue === "relevant"){
+                    //             if(this.state.sortOrder === "ascending"){
+                    //                 return a.productPrice - b.productPrice
+                    //             }else{
+                    //                 return b.productPrice - a.productPrice
+                    //             }
+                    //         }else{
+                    //             if(this.state.sortOrder === "ascending"){
+                    //                 return a.productPrice - b.productPrice
+                    //             }else{
+                    //                 return b.productPrice - a.productPrice
+                    //             }
+                    //         }
+                    //     }.bind(this)
+                    // )
                 })
             );
     }
@@ -113,9 +115,9 @@ class Gallery extends Component {
                         }
                         }}
                     >
-                        <img src={'https://image.tmdb.org/t/p/w200' + item.poster_path} alt=" "/>
-                        <h6>{item.title}</h6>
-                        <h6>{item.vote_average}</h6>
+                        <img src="http://via.placeholder.com/200x200" alt=" "/>
+                        <h6>{item.productName}</h6>
+                        <h6>{item.productPrice}</h6>
                     </Link>
 
 
