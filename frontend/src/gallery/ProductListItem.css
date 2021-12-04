@@ -1,0 +1,18 @@
+.product-list-item {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    background-color: #b2cede;
+    margin: 10px 0;
+}
+
+.img-product {
+    width: 10%;
+}
+
+.product-date {
+    position: absolute;
+    right: 0;
+    margin-right: 20px;
+}
