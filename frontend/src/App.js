@@ -7,7 +7,8 @@ import './App.css'
 import Login from './login/Login'
 import User from './user/User'
 import Details from './details/Details'
-import Post from './../../post/Post'
+import Gallery from './gallery/Gallery.jsx'
+import Post from './post/Post'
 
 function App() {
   return (
@@ -15,8 +16,13 @@ function App() {
       <BrowserRouter>
 
         <Routes>
-          <Route exact path='/login' element={<Login/>} />
+          <Route exact path='/' element={<Gallery/>} />
         </Routes>
+
+        <Routes>
+          <Route path='/login' element={<Login/>} />
+        </Routes>
+
         
         <Routes>
           <Route path='/user' element={<User/>} />
