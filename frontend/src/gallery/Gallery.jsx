@@ -108,7 +108,7 @@ class Gallery extends Component {
                     <div className="item-picture" key={item.id}>
                     <Link
                         to={{
-                        pathname: `/${item.id}`,
+                        pathname: `details/${item.id}`,
                         state: { 
                             itemlist: this.state.items,
                             curIdx: index
