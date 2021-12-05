@@ -29,13 +29,17 @@ var ProductSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    buyer: {
+    buyerName: {
         type: String,
         default: ""
     },
     buyerID: {
         type: String,
         default: ""
+    },
+    dateCreated: {
+        type: Date,
+        default: Date.now
     }
 });
 
