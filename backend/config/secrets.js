@@ -3,6 +3,6 @@
  */
 module.exports = {
     token : "secret-starter-mern",
-    mongo_connection : "mongodb+srv://mp3:mp3123@cluster0.ztbmo.mongodb.net/test?retryWrites=true&w=majority"
+    mongo_connection : "YOUR URL TO MONGODB"
     //example: mongo_connection : "mongodb+srv://[type-yours]:[type-yours]@[type-yours-web-provided].mongodb.net/test?retryWrites=true"
 };
