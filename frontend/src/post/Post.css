@@ -1,0 +1,11 @@
+.container-login-form{
+    display: flex;
+    max-width: 90%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around
+  }
+
+.header{
+    text-align: center;
+}
