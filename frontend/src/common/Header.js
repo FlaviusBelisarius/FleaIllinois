@@ -1,22 +1,33 @@
+import { Fragment } from "react"
 import { Link } from "react-router-dom"
+import { useAuth } from "../common/AuthContext"
 import './Header.css'
 
 const Header = () => {
+    const { currentUser, logoutUser } = useAuth()
+    console.log("user: ", currentUser)
+
+    const handleLogout = (e) => {
+        e.preventDefault()
+        logoutUser()
+    }
+
     return (
         <header className='header'>
-            <h1>Flea Illinois</h1>
+            <Link to='/' className='link-heading'><h1>Flea Illinois</h1></Link>
             <form className='form-search-bar'>
                 <input type="text" id='input-search-bar'/>
                 <input type="submit" value="Search" />
             </form>
             <div className="container-headings">
                 <Link to='/user/0' className='link-heading'>Post Product</Link>
-                <Link to='/user/0' className='link-heading'>My account</Link>
-                <Link to={{ pathname: "/" }}>
-                    <button>
-                        Back to Gallery
-                    </button>
-                </Link>
+                {currentUser 
+                    ? <Fragment>
+                        <Link to='/user' className='link-heading'>My account</Link>
+                        <Link to='' className='link-heading' onClick={handleLogout}>Logout</Link>
+                    </Fragment>
+                    : <Link to='/login' className='link-heading'>Login</Link>
+                }
             </div>
         </header>
     )

@@ -1,5 +1,5 @@
 .header {
-    width: 100%;
+    width: 100vw;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -19,8 +19,12 @@
 
 }
 
+.header .link-heading{
+    text-decoration: none;
+    color: black;
+}
+
 .header .container-headings .link-heading{
     padding: 0 10px;
-    text-decoration: none;
     color: white;
 }
