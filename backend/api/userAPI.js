@@ -3,10 +3,6 @@ var Product = require('../models/product.js');
 
 var express = require('express');
 router = express.Router()
-// var router = express.Router()
-// ref: https://codereview.stackexchange.com/questions/51614/exporting-routes-in-node-js-express-4
-// module.exports = function (router) {
-    // var userRoute = router.route('/');
 
 router.get('/', function (req, res) {
     var queryWhere = eval("(" + req.query.where + ")");
@@ -121,7 +117,6 @@ router.post('/', function (req, res) {
 
 });
 
-// updateMany: https://docs.mongodb.com/manual/reference/method/db.collection.updateMany/
 router.delete('/:id', function(req, res) {
     
     User.findById(req.params.id).exec()
@@ -203,8 +198,6 @@ router.put('/:id', function(req, res) {
             });
         } else {
             var putUser = {};
-
-            // https://piazza.com/class/kskl2d9ufj118u?cid=355 Replace entire task/user with supplied task/user
             if('name' in req.body && req.body.name !== undefined) {
                 putUser.name = req.body.name;
             }else {
@@ -220,8 +213,6 @@ router.put('/:id', function(req, res) {
                     if(match == null || match.id == data.id) {
                         putUser.email = req.body.email;
 
-                        // putUser.pendingTasks = JSON.parse(req.body.pendingTasks);//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        // change to "unassigned" the previous pendingTasks 
                         Product.updateMany(
                             {assignedSellerID: data.id}, {assignedSellerName: putUser.name}
                         )
