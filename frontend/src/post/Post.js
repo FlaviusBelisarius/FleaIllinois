@@ -1,50 +1,71 @@
 import { Link } from "react-router-dom"
+import { useState } from "react"
+import { storage } from "../common/firebase"
+import { ref, uploadBytes, getDownloadURL } from "@firebase/storage"
+import { useAuth } from "../common/AuthContext"
+import axios from "axios"
+import Constant from "../common/Constant"
 import './Post.css'
 
 const Post = () => {
+    const { currentUser } = useAuth()
+    const [productName, setProductName] = useState('')
+    const [productPrice, setProductPrice] = useState(0)
+    const [productDescription, setProductDescription] = useState('')
+    const [image, setImage] = useState(null)
+    const [error, setError] = useState('')
+
+    const handleChange = e => {
+        if (e.target.files[0]){
+            setImage(e.target.files[0])
+        }
+    }
+    
+    const handleUpload = async (e) => {
+        e.preventDefault()
+        setError('')
+        if (!productName || !productPrice || !productDescription || !image){
+            return setError("Please submit all info")
+        }
+
+        const imageRef = ref(storage, `${currentUser.email}/${Date.now()}-${image.name}`)
+        const uploadResult = await uploadBytes(imageRef, image)
+        console.log("Image uploaded")
+        const imageUrl = await getDownloadURL(imageRef)
+        console.log(imageUrl)
+        const resp = await axios.post(`${Constant.API_BASE}/products`, {
+            productName:  productName,
+            productDescription: productDescription,
+            productPrice: productPrice,
+            productImage: imageUrl
+            //sellerID
+        })
+    }
+
     return (
-        <div className="post">
-            <h1 className="appName">Flea Illinois</h1>
-            <h1 class="header">Post a Listing</h1>
-                <form>   
-            <div class="container-login-form">
+        <div className="Post">
+            <div className="container-post">
+                <form className="form-post">
                     <div className="form-group">
-                        <label htmlFor="itemtype">Item Type</label>
-                        <input type="text" name="itemtype" id="itemtype"/>
+                        <label htmlFor="productName">Product Name</label>
+                        <input type="text" name="productName" onChange={e => setProductName(e.target.value)}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="brandname">Brand Name</label>
-                        <input type="text" name="brandname" id="brandname"/>
+                        <label htmlFor="productPrice">Product Price</label>
+                        <input type="text" name="productPrice" onChange={e => setProductPrice(e.target.value)}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="model">Model</label>
-                        <input type="text" name="model" id="model"/>
+                        <label htmlFor="productDescription">Product Description</label>
+                        <textarea name="productDescription" onChange={e => setProductDescription(e.target.value)}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="condition">Condition</label>
-                        <input type="text" name="condition" id="condition"/>
+                        <label htmlFor="productImage">Upload Product Image</label>
+                        <input type="file" name="productImage" onChange={handleChange}/>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="color">Color</label>
-                        <input type="text" name="color" id="color"/>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="warranty">Warranty</label>
-                        <input type="text" name="warranty" id="warranty"/>
-                    </div>
-                    <div>
-                    <form action="/action_page.php"> Photo
-                      <input type="file" id="myFile" name="filename"/>
-                      <input type="submit"/>
-                    </form>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="price">Price</label>
-                        <input type="text" name="price" id="price"/>
-                    </div>
-                    <input type="submit" value="Submit"/>
-            </div>
                 </form>
+                <Link to="" className="link-submit" onClick={handleUpload}> Submit</Link>
+                {error && <p>{error}</p>}
+            </div>
         </div>
     )
 }
