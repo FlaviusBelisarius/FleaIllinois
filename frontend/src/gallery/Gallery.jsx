@@ -12,7 +12,7 @@ const Gallery = () => {
     const [isLoading, setIsLoading] = useState(true)
 
     const fetchProducts = async () => {
-        await axios.get(`${Constant.API_BASE}products?page=${currentPage}&limit=${limit}`)
+        await axios.get(`${Constant.API_BASE}/products?page=${currentPage}&limit=${limit}`)
                     .then(res => {
                         setProducts(res.data)
                         console.log(products)
