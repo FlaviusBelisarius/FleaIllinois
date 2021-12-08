@@ -11,7 +11,8 @@ var ProductSchema = new mongoose.Schema({
     },
     productPrice: {
         type: Number, 
-        default: 0.0
+        default: 0.0,
+        required: true
     },
     productImage: {
         type: String,
@@ -21,17 +22,9 @@ var ProductSchema = new mongoose.Schema({
         type: String,
         default: ""
     },
-    sellerName: {
-        type: String,
-        default: ""
-    },
     forSell: {
         type: Boolean,
-        default: false
-    },
-    buyerName: {
-        type: String,
-        default: ""
+        default: true
     },
     buyerID: {
         type: String,

@@ -87,9 +87,7 @@ router.post('/', function(req, res) {
         productPrice: req.body.price, // must have
         productImage: req.body.image,
         sellerID: req.body.sellerID, // must have
-        sellerName: req.body.sellerName,
         forSell: true, // wile posting, every product is selling
-        buyerName: "",
         buyerID: "", 
     }
     User.findById(req.body.sellerID, function(userErr, targetUser){
