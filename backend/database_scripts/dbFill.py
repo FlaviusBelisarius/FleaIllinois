@@ -114,35 +114,18 @@ def main(argv):
         assignedSellerName = userNames[assignedSellerIdx]
         assignedForSell = (randint(0,10) > 2) # forSell: true or false
         assignedPrice = randint(1,50) * 10
-        assignedDate = (mktime(date.today().timetuple()) - randint(86400,864000)) * 1000
-        description = "FleaIllinois is fantastic."
+        assignedDate = (mktime(date.today().timetuple()) - randint(86400,864000*4)) * 1000
+        description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Neque volutpat ac tincidunt vitae. Sed arcu non odio euismod lacinia at quis risus. Nec ultrices dui sapien eget. Non tellus orci ac auctor augue mauris augue neque. Accumsan lacus vel facilisis volutpat est."
+
         assignedImage = "http://via.placeholder.com/200x200"
-
-        if not assignedForSell:
-            assignedBuyerBool = (randint(0,10) > 2) # true or false
-            assignedBuyerIdx = randint(0,len(userIDs)-1) if assignedBuyerBool else -1
-            while assignedBuyerIdx == assignedSellerIdx:
-                assignedBuyerIdx = randint(0,len(userIDs)-1)
-            if assignedBuyerIdx == -1:
-                assignedBuyerID = ""
-                assignedBuyerName = ""   
-            else:
-                assignedBuyerID = userIDs[assignedBuyerIdx]
-                assignedBuyerName = userNames[assignedBuyerIdx]
-        else:
-            assignedBuyerID = ""
-            assignedBuyerName = ""       
-
         
-        params = urllib.parse.urlencode({'name': choice(productNames), 'description': description, 'price': assignedPrice, 'image': assignedImage, 'sellerID': assignedSellerID, 'forSell': assignedForSell, 'buyerID': assignedBuyerID, 'dataCreated': assignedDate})
+        params = urllib.parse.urlencode({'name': choice(productNames), 'description': description, 'price': assignedPrice, 'image': assignedImage, 'sellerID': assignedSellerID, 'forSell': assignedForSell, 'dataCreated': assignedDate})
 
         # POST the product
         conn.request("POST", "/api/products", params, headers)
         response = conn.getresponse()
         data = response.read()
         d = json.loads(data)
-
-        # print(d)
 
         productID = str(d['data']['_id'])
 

@@ -97,7 +97,6 @@ router.post('/', function(req, res) {
         productImage: req.body.image,
         sellerID: req.body.sellerID, // must have
         forSell: true, // wile posting, every product is selling
-        buyerID: "", 
     }
     User.findById(req.body.sellerID, function(userErr, targetUser){
         if(targetUser){ // every product must have a valid seller
@@ -147,16 +146,7 @@ router.put('/:id', function(req, res) {
                     }
                 });
             }
-            if(req.body.buyerID && req.body.buyerID != ""){ // if buyer is updated(it's ok to have an empty buyer)
-                User.findById(req.body.buyerID, function(userErr, targetUser){
-                    if(userErr || !targetUser){
-                        return res.status(400).json({
-                            message:"Buyer is invalid or not found", 
-                            data: []
-                        });
-                    }
-                });
-            }
+            
             return res.status(201).json({
                 message: 'Product updated',
                 data: updatedProduct
