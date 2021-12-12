@@ -30,6 +30,7 @@ const Header = () => {
             />
             <Link to={`/?name=${queryInput}`} > search </Link>
 
+
             </form>
             <div className="container-headings">
                 {currentUser 
