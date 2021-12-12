@@ -11,6 +11,10 @@
 .link-user-tabs{
     text-decoration: none;
     padding: 0 10px;
+    font-family: "Helvetica Neue", "Arial", sans-serif;
+    font-style: italic;
+    font-weight: 100;
+    font-variant-ligatures: normal;
 }
 
 .container-user-tabs {
@@ -24,6 +28,11 @@
     align-items: center;
     width: 60vw;
     padding: 10px 0;
-    border: solid;
+    border: inset;
+    border-radius: 50px;
+    font-family: "Helvetica Neue", "Arial", sans-serif;
+    font-style: italic;
+    font-weight: 100;
+    font-variant-ligatures: normal;
 }
 

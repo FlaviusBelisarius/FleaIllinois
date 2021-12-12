@@ -42,7 +42,7 @@ class Details extends Component {
             verified = "No"
         }
         return (
-            <div>
+            <div className="div">
                 <section id = "intro">
                     <div>
                         <img src={this.state.product.productImage}/>

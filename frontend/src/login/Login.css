@@ -10,10 +10,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: white;
+    background-color: rgb(150, 156, 156);
     width: 300px;
     padding: 50px 0;
     border-radius: 10px;
+    border: inset;
+    border-radius: 25px;
 }
 
 .container-login-form {
@@ -37,7 +39,8 @@
 .link-login-option,
 .link-submit {
     text-decoration: none;
-    color: black;
+    background-color: #181c44;
+    color: white;
     border: solid 2px;
     border-radius: 10px;
     padding: 0 5px;

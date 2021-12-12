@@ -57,7 +57,7 @@ const Gallery = () => {
 
     return (
         <div className="Gallery">
-            <form>
+            <form className="form">
                 <label>
                     &nbsp;&nbsp;&nbsp;
                     <b>Sort by</b>
