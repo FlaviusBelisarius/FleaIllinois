@@ -9,6 +9,7 @@ const ProductGalleryItem = ( {product} ) => {
                 <div className="container-product-info">
                     <p>{product.productName}</p>
                     <p>${product.productPrice}</p>
+                    <p>{product.dateCreated.substring(0, 10)}</p>
 
                 </div>
             </Link>
