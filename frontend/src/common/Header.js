@@ -2,10 +2,16 @@ import { Fragment } from "react"
 import { Link } from "react-router-dom"
 import { useAuth } from "../common/AuthContext"
 import './Header.css'
+import { useState, useEffect } from "react";
 
 const Header = () => {
     const { currentUser, logoutUser } = useAuth()
     console.log("user: ", currentUser)
+
+    const [queryInput, setQueryInput] = useState("")
+    const handleQueryChange = (input) => {
+        setQueryInput(input)
+    };
 
     const handleLogout = (e) => {
         e.preventDefault()
@@ -16,8 +22,14 @@ const Header = () => {
         <header className='header'>
             <Link to='/' className='link-heading'><h1>Flea Illinois</h1></Link>
             <form className='form-search-bar'>
-                <input type="text" id='input-search-bar'/>
-                <input type="submit" value="Search" />
+            <input
+                type="search"
+                onChange={event => handleQueryChange(event.target.value)}
+                placeholder="search items here"
+                id='input-search-bar'
+            />
+            <Link to={`/?name=${queryInput}`} > search </Link>
+
             </form>
             <div className="container-headings">
                 {currentUser 

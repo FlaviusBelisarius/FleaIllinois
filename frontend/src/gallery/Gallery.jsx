@@ -3,7 +3,8 @@ import axios from "axios";
 import ProductGalleryItem from "./ProductGalleryItem";
 import Constant from "../common/Constant";
 import './Gallery.css'
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+
 
 const Gallery = () => {
     const limit = 12
@@ -12,10 +13,17 @@ const Gallery = () => {
     const [isLoading, setIsLoading] = useState(true)
 
     const fetchProducts = async () => {
-        await axios.get(`${Constant.API_BASE}/products?page=${currentPage}&limit=${limit}`)
+        let url;
+        
+        if(window.location.href === 'http://localhost:3000/'){
+            console.log(window.location.href)
+            url = `${Constant.API_BASE}/products?skip=${limit*(currentPage-1)}&limit=${limit}`
+        }else{
+            url = `${Constant.API_BASE}/products?where={"productName":"${window.location.href.slice(28)}"}&skip=${limit*(currentPage-1)}&limit=${limit}`
+        }
+        await axios.get(url)
                     .then(res => {
-                        setProducts(res.data)
-                        console.log(products)
+                        setProducts(res.data.data)
                         setIsLoading(false)
                     })
     }
@@ -30,13 +38,13 @@ const Gallery = () => {
     
     useEffect (() => {
         fetchProducts()
-    }, [currentPage])
+    }, [currentPage,useLocation()])
 
     return (
         <div className="Gallery">
             <div className="container-gallery">
                 {products.map((product) => (
-                    <ProductGalleryItem key={product.id} product={product} />
+                    <ProductGalleryItem key={product._id} product={product} />
                 ))}
             </div>
             <div className="container-pagination">
