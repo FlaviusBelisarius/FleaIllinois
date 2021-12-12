@@ -45,14 +45,14 @@ class Details extends Component {
             <div>
                 <section id = "intro">
                     <div>
-                        <img src="https://assets.nintendo.com/image/upload/b_white,c_pad,f_auto,h_382,q_auto,w_573/ncom/en_US/switch/site-design-update/hardware/switch/nintendo-switch-oled-model-white-set/gallery/image03?v=2021112423"/>
-                        {/* <img src="this.state.product.productImage"/> */}
+                        <img src={this.state.product.productImage}/>
+                        {/* <img src="https://assets.nintendo.com/image/upload/b_white,c_pad,f_auto,h_382,q_auto,w_573/ncom/en_US/switch/site-design-update/hardware/switch/nintendo-switch-oled-model-white-set/gallery/image03?v=2021112423"/> */}
                         <h1>{this.state.product.productName}</h1>
                         <p class="lead">{this.state.product.productDescription}</p>
                     </div>
                 </section>
                 <section id = "seller-info">
-                    <img src="https://st2.depositphotos.com/1009634/7235/v/950/depositphotos_72350117-stock-illustration-no-user-profile-picture-hand.jpg"/>
+                    <img src={this.state.user.profileImage}/>
                     <h3>Seller: {this.state.user.name}</h3>
                     <h3>UIUC student/faculty certification: {verified}</h3>
                     <h3>Cell phone: N/A</h3>
