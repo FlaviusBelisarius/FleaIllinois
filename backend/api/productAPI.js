@@ -11,8 +11,19 @@ function parseQuery(condition) {
     return condition;
 }
 
+function parseQuery_where(condition) {
+    if (typeof condition !== 'undefined'){
+        var temp = JSON.parse(condition)
+        temp.productName = new RegExp(temp.productName)
+        console.log(temp.productName)
+        return temp;
+    }
+    return condition;
+}
+
 router.get('/', function(req, res) {
-    Product.find(parseQuery(req.query.where))
+    Product.find(parseQuery_where(req.query.where))
+        // .page(parseQuery(req.query.page))
         .sort(parseQuery(req.query.sort))
         .select(parseQuery(req.query.select))
         .skip(parseQuery(req.query.skip))

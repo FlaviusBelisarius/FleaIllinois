@@ -22,6 +22,10 @@ function App() {
             <Route exact path='/' element={<Gallery/>} />
           </Routes>
 
+          {/* <Routes>
+            <Route path='/:id' element={<Gallery/>} />
+          </Routes> */}
+
           <Routes>
             <Route path='/login' element={<Login/>} />
           </Routes>
