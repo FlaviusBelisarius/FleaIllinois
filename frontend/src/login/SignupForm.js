@@ -25,6 +25,21 @@ const LoginForm = () => {
         setIsLoading(false)
     }
 
+    const toggle = async () => {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+          x.type = "text";
+        } else {
+          x.type = "password";
+        }
+        var y = document.getElementById("confirm-password");
+        if (y.type === "password") {
+          y.type = "text";
+        } else {
+          y.type = "password";
+        }
+    }
+
     return (
         <form onSubmit={handleSubmit}>
             <div className="container-login-form">
@@ -34,12 +49,13 @@ const LoginForm = () => {
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
-                        <input type="text" name="password" id="password" onChange={e => setPassword(e.target.value)}/>
+                        <input type="password" name="password" id="password" onChange={e => setPassword(e.target.value)}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="confirm-password">Confirm Password</label>
-                        <input type="text" name="confirm-password" id="confirm-password" onChange={e => setConfirmPassword(e.target.value)}/>
+                        <input type="password" name="confirm-password" id="confirm-password" onChange={e => setConfirmPassword(e.target.value)}/>
                     </div>
+                    <input type="checkbox" onClick={toggle}/>Show Password
                     {isLoading
                         ?<Link to="" className="link-submit" onClick={handleSubmit}> Loading</Link>
                         :<Link to="" className="link-submit" onClick={handleSubmit}>Create Account</Link>
