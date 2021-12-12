@@ -1,9 +1,21 @@
-#intro img {
-    float: left;
+.div{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 90%;
+    padding-top: 85px;
+    /*justify-content: space-evenly */
+}
+
+#intro{
+    margin: auto;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #seller-info img {
-    float: left;
     height: 12rem;
     width: 12rem;
 }
