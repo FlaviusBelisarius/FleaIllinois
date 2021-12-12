@@ -26,10 +26,6 @@ var ProductSchema = new mongoose.Schema({
         type: Boolean,
         default: true
     },
-    buyerID: {
-        type: String,
-        default: ""
-    },
     dateCreated: {
         type: Date,
         default: Date.now
