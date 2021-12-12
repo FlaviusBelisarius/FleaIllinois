@@ -58,7 +58,7 @@ const Gallery = () => {
     return (
         <div className="Gallery">
             <form className="form">
-                <label>
+                <label className="sortBar">
                     &nbsp;&nbsp;&nbsp;
                     <b>Sort by</b>
                     &nbsp;
@@ -72,7 +72,7 @@ const Gallery = () => {
                     </select>
                 </label>
 
-                <label>
+                <label className="sortBar">
                     &nbsp;&nbsp;&nbsp;
                     <b>Order</b>
                     &nbsp;

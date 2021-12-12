@@ -16,3 +16,13 @@
 .img-product{
     width: 10vw;
 }
+
+.container-product-info{
+    line-height: 40%;
+}
+
+#name{
+    font-weight: bold;
+    font-size: 110%;
+    color: rgb(13, 24, 87);
+}
