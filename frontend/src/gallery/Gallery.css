@@ -8,7 +8,7 @@
 }
 
 .container-gallery {
-    width: 80%;
+    width: 95%;
     display: grid;
     grid-template-columns: repeat(4, 2fr);
     grid-template-rows: auto;
@@ -33,5 +33,13 @@
     font-style: italic;
     font-weight: 100;
     font-variant-ligatures: normal;
+}
+
+.sortBar{
+    color: #0f1e4e;
+    font-weight: bold;
+    display: block;
+    width: 150px;
+    float: left;
 }
 

@@ -5,6 +5,7 @@
     justify-content: space-around;
     background-color: #181c44;
     border-radius: 25px; 
+    position: fixed
 }
 
 /* .header .form-search-bar {
