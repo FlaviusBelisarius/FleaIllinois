@@ -9,7 +9,6 @@ const ProductGalleryItem = ( {product} ) => {
                 <div className="container-product-info">
                     <p>{product.productName}</p>
                     <p>${product.productPrice}</p>
-                    <p>{product.productDescription}</p>
 
                 </div>
             </Link>

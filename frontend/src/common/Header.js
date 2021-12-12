@@ -9,12 +9,8 @@ const Header = () => {
     console.log("user: ", currentUser)
 
     const [queryInput, setQueryInput] = useState("")
-    // var query = "a"
-    // var query = 1
     const handleQueryChange = (input) => {
-        // query = input
         setQueryInput(input)
-        console.log(`/?name=`+queryInput)
     };
 
     const handleLogout = (e) => {
@@ -28,13 +24,11 @@ const Header = () => {
             <form className='form-search-bar'>
             <input
                 type="search"
-                // value={query}
                 onChange={event => handleQueryChange(event.target.value)}
                 placeholder="search items here"
                 id='input-search-bar'
             />
             <Link to={`/?name=${queryInput}`} > search </Link>
-            {/* <input type="submit" value="Search" /> */}
 
             </form>
             <div className="container-headings">

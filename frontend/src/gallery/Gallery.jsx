@@ -1,63 +1,10 @@
-// import { useState, useEffect } from "react";
-// import axios from "axios";
-// import ProductGalleryItem from "./ProductGalleryItem";
-// import Constant from "../common/Constant";
-// import './Gallery.css'
-// import { Link } from "react-router-dom";
-
-// const Gallery = () => {
-//     const limit = 12
-//     const [products, setProducts] = useState([])
-//     const [currentPage, setCurrentPage] = useState(1)
-//     const [isLoading, setIsLoading] = useState(true)
-
-//     const fetchProducts = async () => {
-//         await axios.get(`${Constant.API_BASE}/products?skip=${limit*currentPage}&limit=${limit}`)
-//                     .then(res => {
-//                         setProducts(res.data.data)
-//                         console.log(products)
-//                         setIsLoading(false)
-//                     })
-//     }
-
-//     const handlePageChange = (e, offset) => {
-//         e.preventDefault()
-//         let newPage = currentPage + offset
-//         if (newPage > 0){
-//             setCurrentPage(newPage)
-//         }
-//     }
-    
-//     useEffect (() => {
-//         fetchProducts()
-//     }, [currentPage])
-
-//     return (
-//         <div className="Gallery">
-//             <div className="container-gallery">
-//                 {products.map((product) => (
-//                     <ProductGalleryItem key={product._id} product={product} />
-//                 ))}
-//             </div>
-//             <div className="container-pagination">
-//                 <Link to='' onClick={e => handlePageChange(e, -1)}>Prev</Link>
-//                 <p>{currentPage}</p>
-//                 <Link to='' onClick={e => handlePageChange(e, 1)}>Next</Link>
-//             </div>
-//         </div>
-//     )
-// }
-
-// export default Gallery
-
-
-
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ProductGalleryItem from "./ProductGalleryItem";
 import Constant from "../common/Constant";
 import './Gallery.css'
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+
 
 const Gallery = () => {
     const limit = 12
@@ -74,12 +21,9 @@ const Gallery = () => {
         }else{
             url = `${Constant.API_BASE}/products?where={"productName":"${window.location.href.slice(28)}"}&skip=${limit*(currentPage-1)}&limit=${limit}`
         }
-        // await axios.get(`${Constant.API_BASE}/products?page=${currentPage}&limit=${limit}`)
         await axios.get(url)
                     .then(res => {
                         setProducts(res.data.data)
-                        // console.log(`${Constant.API_BASE}/products?where={"productName":"${window.location.href.slice(28)}"}&page=${currentPage}&limit=${limit}`)
-                        // console.log(window.location.href.slice(28))
                         setIsLoading(false)
                     })
     }
@@ -94,7 +38,7 @@ const Gallery = () => {
     
     useEffect (() => {
         fetchProducts()
-    }, [currentPage])
+    }, [currentPage,useLocation()])
 
     return (
         <div className="Gallery">
