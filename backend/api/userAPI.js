@@ -81,11 +81,17 @@ router.post('/', function (req, res) {
         });
     }
 
+    var inputEmail = req.body.email; 
     if ('email' in req.body && req.body.email !== undefined) {
         User.findOne({email: req.body.email}).exec()
         .then(function (match){
             if (match == null) {
-                newUser.email = req.body.email;                            
+                newUser.email = req.body.email; 
+                const temp = inputEmail.split('@');
+                var len = temp.length;
+                if(temp[len-1] == "illinois.edu"){
+                    newUser.verified = true;
+                }                      
                 newUser.save()
                 .then(function (data) {
                     res.status(201).send({
@@ -129,12 +135,10 @@ router.delete('/:id', function(req, res) {
             });
         } 
         else if (user != null) {
-            console.log(1)
             Product.updateMany(
                 {buyerID: user.id}, {buyerID: "", buyerName: ""}
             )
             .then(function(){
-                console.log("yakkkkk");
                 Product.updateMany(
                     {sellerID: user.id}, {sellerID: "", sellerName: "",}
                 ).then(function(){
@@ -217,7 +221,6 @@ router.put('/:id', function(req, res) {
                             {assignedSellerID: data.id}, {assignedSellerName: putUser.name}
                         )
                         .then(function(){
-                            console.log("yak");
                             Product.updateMany(
                                 {assignedBuyerID: data.id}, {assignedBuyerName: putUser.name}
                             ).then(function(){
