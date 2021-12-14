@@ -17,9 +17,9 @@ const Gallery = () => {
         
         if(window.location.href === 'http://localhost:3000/'){
             console.log(window.location.href)
-            url = `${Constant.API_BASE}/products`
+            url = `${Constant.API_BASE}/products?where={"forSell": true}`
         }else{
-            url = `${Constant.API_BASE}/products?where={"productName":"${window.location.href.slice(28)}"}`
+            url = `${Constant.API_BASE}/products?where={"productName":"${window.location.href.slice(28)}","forSell": true}`
         }
         await axios.get(url)
                     .then(res => {
@@ -33,9 +33,9 @@ const Gallery = () => {
                                     }
                                 }else{
                                     if(sortOrder === "ascending"){
-                                        return a.dateCreated - b.dateCreated
+                                        return new Date(a.dateCreated) - new Date(b.dateCreated)
                                     }else{
-                                        return b.dateCreated - a.dateCreated
+                                        return new Date(b.dateCreated) - new Date(a.dateCreated)
                                     }
                                 }
                             }
