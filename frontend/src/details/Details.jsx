@@ -61,7 +61,12 @@ const Details = () => {
                     <div class="content">
                         <div class="header">{user.name}</div>
                         <div class="meta">UIUC student/faculty certification: {verified}</div>
-                        <div class="description">Cell phone: {cellphone}<br></ br>Email: {user.email}</div>
+                        {currentUser
+                            ?
+                            <div class="description">Cell phone: {cellphone}<br></ br>Email: {user.email}</div>
+                            :
+                            <div></div>
+                        }
                     </div>
                 </div>
             </section>
