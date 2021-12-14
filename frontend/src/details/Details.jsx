@@ -68,6 +68,7 @@ class Details extends Component {
                         </div>
                     </div>
                 </section>
+                <section id="comments">
                 <Comment.Group>
                     {this.state.commentList.map(comment => (
                         <Comment>
@@ -85,6 +86,7 @@ class Details extends Component {
                     <Form.TextArea />
                     <Button content='Add Comment' labelPosition='left' icon='edit' primary />
                 </Form>
+                </section>
             </div>
         );
     }
