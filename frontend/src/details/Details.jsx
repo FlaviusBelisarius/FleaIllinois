@@ -1,16 +1,13 @@
-import React, { Component } from "react";
 import axios from "axios";
 import './Details.css';
 import { Button, Comment, Form} from 'semantic-ui-react';
-import { Fragment } from "react"
 import { useAuth } from "../common/AuthContext"
-import { useState, useEffect } from "react";
+import { React, useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 
 const Details = () => {
     const { currentUser, logoutUser } = useAuth()
-    console.log("user: ", currentUser)
     const [product, setProduct] = useState({})
     const [user, setUser] = useState({})
     const [commentList, setCommentList] = useState([])
