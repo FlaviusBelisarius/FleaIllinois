@@ -17,9 +17,9 @@ const Gallery = () => {
         
         if(window.location.href === 'http://localhost:3000/'){
             console.log(window.location.href)
-            url = `${Constant.API_BASE}/products`
+            url = `${Constant.API_BASE}/products?where={"forSell": true}`
         }else{
-            url = `${Constant.API_BASE}/products?where={"productName":"${window.location.href.slice(28)}"}`
+            url = `${Constant.API_BASE}/products?where={"productName":"${window.location.href.slice(28)}","forSell": true}`
         }
         axios.get(url)
             .then(res => {
