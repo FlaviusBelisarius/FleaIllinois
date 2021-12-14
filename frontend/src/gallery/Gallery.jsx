@@ -21,27 +21,31 @@ const Gallery = () => {
         }else{
             url = `${Constant.API_BASE}/products?where={"productName":"${window.location.href.slice(28)}"}`
         }
-        await axios.get(url)
-                    .then(res => {
-                        setProducts(res.data.data.sort(
-                            function(a, b) {
-                                if(sortValue === "price"){
-                                    if(sortOrder === "ascending"){
-                                        return a.productPrice - b.productPrice
-                                    }else{
-                                        return b.productPrice - a.productPrice
-                                    }
-                                }else{
-                                    if(sortOrder === "ascending"){
-                                        return a.dateCreated - b.dateCreated
-                                    }else{
-                                        return b.dateCreated - a.dateCreated
-                                    }
-                                }
+        axios.get(url)
+            .then(res => {
+                setProducts(res.data.data.sort(
+                    function(a, b) {
+                        if(sortValue === "price"){
+                            if(sortOrder === "ascending"){
+                                return a.productPrice - b.productPrice
+                            }else{
+                                return b.productPrice - a.productPrice
                             }
-                        ))
-                        setIsLoading(false)
-                    })
+                        }else{
+                            if(sortOrder === "ascending"){
+                                return a.dateCreated - b.dateCreated
+                            }else{
+                                return b.dateCreated - a.dateCreated
+                            }
+                        }
+                    }
+                ))
+                setIsLoading(false)
+            })
+            .catch (err => {
+                console.log(err.message)
+            })
+                    
     }
 
     const handleSortOrderChange = (sortOrder) => {

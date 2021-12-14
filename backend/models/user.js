@@ -3,6 +3,10 @@ var mongoose = require('mongoose');
 
 // Define our user schema
 var UserSchema = new mongoose.Schema({
+    uid: {
+        type: String,
+        default: ""
+    },
     name: {
         type: String,
         required: true,

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { storage } from "../common/firebase"
 import { ref, uploadBytes, getDownloadURL } from "@firebase/storage"
@@ -8,6 +8,7 @@ import Constant from "../common/Constant"
 import './Post.css'
 
 const Post = () => {
+    const navigate = useNavigate()
     const { currentUser } = useAuth()
     const [productName, setProductName] = useState('')
     const [productPrice, setProductPrice] = useState(0)
@@ -28,18 +29,26 @@ const Post = () => {
             return setError("Please submit all info")
         }
 
-        const imageRef = ref(storage, `${currentUser.email}/${Date.now()}-${image.name}`)
-        const uploadResult = await uploadBytes(imageRef, image)
-        console.log("Image uploaded")
-        const imageUrl = await getDownloadURL(imageRef)
-        console.log(imageUrl)
-        const resp = await axios.post(`${Constant.API_BASE}/products`, {
-            productName:  productName,
-            productDescription: productDescription,
-            productPrice: productPrice,
-            productImage: imageUrl
-            //sellerID
-        })
+        try{
+            const imageRef = ref(storage, `${currentUser.email}/${Date.now()}-${image.name}`)
+            const uploadResult = await uploadBytes(imageRef, image)
+            console.log("Image uploaded")
+            const imageUrl = await getDownloadURL(imageRef)
+            console.log(imageUrl)
+            let newProduct = {
+                name:  productName,
+                description: productDescription,
+                price: parseInt(productPrice),
+                image: imageUrl,
+                sellerID: currentUser.uid
+            }
+            console.log(newProduct)
+            const resp = await axios.post(`${Constant.API_BASE}/products`, newProduct)
+            console.log(resp)
+            navigate('/')
+        } catch (err) {
+            console.log(err.message)
+        }
     }
 
     return (

@@ -99,39 +99,55 @@ router.post('/', function(req, res) {
         forSell: true, // while posting, every product is selling
         commentList: req.body.commentList
     }
-    User.findById(req.body.sellerID, function(userErr, targetUser){
-        if(targetUser){ // every product must have a valid seller
-            Product.create(newProduct)
-                .then(postRes => {
-                    return res.status(201).json({
-                        message: "Product successfully created", 
-                        data: postRes
-                    })
-                })
-                .catch(err => {
-                    return res.status(500).json({
-                        message: "Server Error",
-                        data: err
-                    });
-                });
-        }else if(userErr){ // seller not found or error
-            if (userErr.name == "CastError") {
-                return res.status(400).json({
-                    message:"Seller id is invalid", 
-                    data: {"Invalid id is": req.body.sellerID}
-                });
-            }
-            return res.status(500).json({
-                message: "Server error",
-                data: err
-            });
-        }else{
-            return res.status(404).json({
-                message: "Seller not found",
-                data: []
-            });
-        }
+
+    Product.create(newProduct)
+    .then(postRes => {
+        return res.status(201).json({
+            message: "Product successfully created", 
+            data: postRes
+        })
+    })
+    .catch(err => {
+        return res.status(500).json({
+            message: "Server Error",
+            data: err
+        });
     });
+    //sellerID = uid, which is provided by firebase
+
+    // User.findById(req.body.sellerID, function(userErr, targetUser){
+    //     if(targetUser){ // every product must have a valid seller
+    //         Product.create(newProduct)
+    //             .then(postRes => {
+    //                 return res.status(201).json({
+    //                     message: "Product successfully created", 
+    //                     data: postRes
+    //                 })
+    //             })
+    //             .catch(err => {
+    //                 return res.status(500).json({
+    //                     message: "Server Error",
+    //                     data: err
+    //                 });
+    //             });
+    //     }else if(userErr){ // seller not found or error
+    //         if (userErr.name == "CastError") {
+    //             return res.status(400).json({
+    //                 message:"Seller id is invalid", 
+    //                 data: {"Invalid id is": req.body.sellerID}
+    //             });
+    //         }
+    //         return res.status(500).json({
+    //             message: "Server error",
+    //             data: err
+    //         });
+    //     }else{
+    //         return res.status(404).json({
+    //             message: "Seller not found",
+    //             data: []
+    //         });
+    //     }
+    // });
 });
 
 router.put('/:id', function(req, res) {
