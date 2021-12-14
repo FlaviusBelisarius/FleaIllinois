@@ -46,7 +46,7 @@ router.get('/', function (req, res) {
 });
 
 router.get('/:id', function(req, res) {
-    User.findById(req.params.id).exec()
+    User.findOne({'uid' : req.params.id}).exec()
 
     .then(function(user) {
         if(user == null) {
@@ -87,6 +87,7 @@ router.post('/', function (req, res) {
         .then(function (match){
             if (match == null) {
                 newUser.email = req.body.email; 
+                newUser.uid = req.body.uid;
                 const temp = inputEmail.split('@');
                 var len = temp.length;
                 if(temp[len-1] == "illinois.edu"){

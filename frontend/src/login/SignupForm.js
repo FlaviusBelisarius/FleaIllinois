@@ -1,12 +1,16 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../common/AuthContext"
+import axios from "axios"
+import Constant from "../common/Constant"
 
 const LoginForm = () => {
     const navigate = useNavigate()
-    const [email, setEmail] = useState()
-    const [password, setPassword] = useState()
-    const [confirmPassword, setConfirmPassword] = useState()
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
+    const [name, setName] = useState("")
+    const [phoneNumber, setPhoneNumber] = useState("")
     const [isLoading, setIsLoading] = useState(false)
     const { registerUser } = useAuth()
 
@@ -17,7 +21,14 @@ const LoginForm = () => {
         }
         try {
             setIsLoading(true)
-            await registerUser(email, password)
+            let res = await registerUser(email, password)
+            console.log(res.user.uid)
+            await axios.post(`${Constant.API_BASE}/users`, {
+                name:  name,
+                email: email,
+                phoneNumber: phoneNumber,
+                uid: res.user.uid
+            })
             navigate('/')
         } catch (err) {
             console.log(err.message)
@@ -43,6 +54,14 @@ const LoginForm = () => {
     return (
         <form onSubmit={handleSubmit}>
             <div className="container-login-form">
+                    <div className="form-group">
+                        <label htmlFor="name">Name</label>
+                        <input type="text" name="name" onChange={e => setName(e.target.value)}/>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="phone">Phone</label>
+                        <input type="text" name="phone" onChange={e => setPhoneNumber(e.target.value)}/>
+                    </div>
                     <div className="form-group">
                         <label htmlFor="email">Email</label>
                         <input type="text" name="email" id="email" onChange={e => setEmail(e.target.value)}/>
