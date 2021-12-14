@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import axios from "axios";
 import './Details.css';
+import { Button, Comment, Form} from 'semantic-ui-react';
 
 class Details extends Component {
     constructor(props) {
         super(props);
         this.state = {
             product: {},
-            user: {}
+            user: {},
+            commentList: []
         };
     }
 
@@ -25,7 +27,8 @@ class Details extends Component {
                         user: {}
                     });
                 this.setState({
-                    product: productResponse.data.data
+                    product: productResponse.data.data,
+                    commentList: productResponse.data.data.commentList // do not know why...
                 });
             }).catch((error) => {
                 this.setState({
@@ -41,6 +44,10 @@ class Details extends Component {
         }else{
             verified = "No"
         }
+        var cellphone = "N/A"
+        // if(this.state.user.phoneNumber.length && this.state.user.phoneNumber.length > 0){
+        //     cellphone = this.state.user.phoneNumber.length
+        // }
         return (
             <div className="div">
                 <section id = "intro">
@@ -53,12 +60,31 @@ class Details extends Component {
                 </section>
                 <section id = "seller-info">
                     <img src={this.state.user.profileImage}/>
-                    <h3>Seller: {this.state.user.name}</h3>
-                    <h3>UIUC student/faculty certification: {verified}</h3>
-                    <h3>Cell phone: N/A</h3>
-                    <h3>Email: {this.state.user.email}</h3>
-                    <button>Contact seller</button>
+                    <div class="ui card">
+                        <div class="content">
+                            <div class="header">{this.state.user.name}</div>
+                            <div class="meta">UIUC student/faculty certification: {verified}</div>
+                            <div class="description">Cell phone: {cellphone}<br></ br>Email: {this.state.user.email}</div>
+                        </div>
+                    </div>
                 </section>
+                <Comment.Group>
+                    {this.state.commentList.map(comment => (
+                        <Comment>
+                            <Comment.Content>
+                                <Comment.Author as='a'>{comment.split("#")[0]}</Comment.Author>
+                                <Comment.Metadata>
+                                    <div>{comment.split("#")[1]}</div>
+                                </Comment.Metadata>
+                                <Comment.Text>{comment.split("#")[2]}</Comment.Text>
+                            </Comment.Content>
+                        </Comment>
+                    ))}
+                </Comment.Group>
+                <Form reply>
+                    <Form.TextArea />
+                    <Button content='Add Comment' labelPosition='left' icon='edit' primary />
+                </Form>
             </div>
         );
     }

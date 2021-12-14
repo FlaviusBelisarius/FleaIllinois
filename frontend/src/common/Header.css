@@ -1,4 +1,4 @@
-.header {
+.headerMine {
     width: 100vw;
     display: flex;
     align-items: center;
@@ -12,11 +12,11 @@
     width: 25%;
 } */
 
-.header .form-search-bar #input-search-bar{
+.headerMine .form-search-bar #input-search-bar{
     width: 300px;
 }
 
-.header .container-headings{
+.headerMine .container-headings{
     display: flex;
     font-family: "Helvetica Neue", "Arial", sans-serif;
     font-style: italic;
@@ -24,7 +24,7 @@
     font-variant-ligatures: normal;
 }
 
-.header .link-heading{
+.headerMine .link-heading{
     text-decoration: none;
     color: rgb(236, 142, 18);
     font-family: "Helvetica Neue", "Arial", sans-serif;
@@ -33,12 +33,12 @@
     font-variant-ligatures: normal;
 }
 
-.header .link-heading:hover{
+.headerMine .link-heading:hover{
     background-color: black;
     color: rgb(219, 152, 6);
 }
 
-.header .container-headings .link-heading{
+.headerMine .container-headings .link-heading{
     padding: 0 10px;
     color: rgb(228, 147, 27);
 }

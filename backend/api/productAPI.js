@@ -96,7 +96,8 @@ router.post('/', function(req, res) {
         productPrice: req.body.price, // must have
         productImage: req.body.image,
         sellerID: req.body.sellerID, // must have
-        forSell: true, // wile posting, every product is selling
+        forSell: true, // while posting, every product is selling
+        commentList: req.body.commentList
     }
     User.findById(req.body.sellerID, function(userErr, targetUser){
         if(targetUser){ // every product must have a valid seller

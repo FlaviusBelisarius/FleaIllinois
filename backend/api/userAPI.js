@@ -91,7 +91,13 @@ router.post('/', function (req, res) {
                 var len = temp.length;
                 if(temp[len-1] == "illinois.edu"){
                     newUser.verified = true;
-                }                      
+                }
+                if('phoneNumber' in req.body && req.body.phoneNumber !== undefined){
+                    newUser.phoneNumber = req.body.phoneNumber;
+                }
+                if('profileImage' in req.body && req.body.profileImage !== undefined){
+                    newUser.profileImage = req.body.profileImage;
+                }
                 newUser.save()
                 .then(function (data) {
                     res.status(201).send({
@@ -209,6 +215,13 @@ router.put('/:id', function(req, res) {
                     message: 'Name is required',
                     data: []
                 });
+            }
+
+            if('phoneNumber' in req.body && req.body.phoneNumber !== undefined){
+                putUser.phoneNumber = req.body.phoneNumber;
+            }
+            if('profileImage' in req.body && req.body.profileImage !== undefined){
+                putUser.profileImage = req.body.profileImage;
             }
 
             if('email' in req.body && req.body.email !== undefined) {

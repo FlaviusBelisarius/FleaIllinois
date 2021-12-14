@@ -19,7 +19,7 @@ const Header = () => {
     }
 
     return (
-        <header className='header'>
+        <header className='headerMine'>
             <Link to='/' className='link-heading'><h1>Flea Illinois</h1></Link>
             <form className='form-search-bar'>
             <input
