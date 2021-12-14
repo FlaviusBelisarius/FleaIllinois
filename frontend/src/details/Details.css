@@ -2,6 +2,7 @@
     display: flex;
     align-items: center;
     flex-direction: row;
+    flex-wrap: wrap;
     width: 90%;
     padding-top: 150px;
     /*justify-content: space-evenly */
@@ -18,6 +19,19 @@
 #seller-info img {
     height: 12rem;
     width: 12rem;
+    margin: auto;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#comments{
+    margin: auto;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .lead {
