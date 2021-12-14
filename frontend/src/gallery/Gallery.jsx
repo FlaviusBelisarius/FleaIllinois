@@ -33,9 +33,9 @@ const Gallery = () => {
                             }
                         }else{
                             if(sortOrder === "ascending"){
-                                return a.dateCreated - b.dateCreated
+                                return new Date(a.dateCreated) - new Date(b.dateCreated)
                             }else{
-                                return b.dateCreated - a.dateCreated
+                                return new Date(b.dateCreated) - new Date(a.dateCreated)
                             }
                         }
                     }
