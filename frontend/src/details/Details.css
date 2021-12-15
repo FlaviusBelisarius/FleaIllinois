@@ -46,3 +46,7 @@
     line-height: 1.7;
     font-family: "lora-regular", serif;
 }
+
+#disabled-button {
+    opacity: 0.3;
+}
