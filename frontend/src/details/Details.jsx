@@ -46,7 +46,7 @@ const Details = () => {
         <div className="div">
             <section id = "intro">
                 <div>
-                    <img src={product.productImage}/>
+                    <img id="photo" src={product.productImage}/>
                     {/* <img src="https://assets.nintendo.com/image/upload/b_white,c_pad,f_auto,h_382,q_auto,w_573/ncom/en_US/switch/site-design-update/hardware/switch/nintendo-switch-oled-model-white-set/gallery/image03?v=2021112423"/> */}
                     <h1>{product.productName}</h1>
                     <p class="lead">{product.productDescription}</p>
