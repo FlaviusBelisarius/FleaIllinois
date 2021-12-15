@@ -6,7 +6,6 @@ import { useState } from "react";
 
 const Header = () => {
     const { currentUser, logoutUser } = useAuth()
-    console.log("user: ", currentUser)
 
     const [queryInput, setQueryInput] = useState("")
     const handleQueryChange = (input) => {
