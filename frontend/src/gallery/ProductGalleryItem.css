@@ -2,6 +2,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+}
+
+.ProductGalleryItem:hover{
+    background-color: #A5A8AA;
+    border-radius: 5%;
 }
 
 .link-gallery-item{

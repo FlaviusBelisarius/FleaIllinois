@@ -5,6 +5,7 @@ import { useAuth } from "../common/AuthContext"
 import { React, useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Constant from "../common/Constant"
+import 'semantic-ui-css/semantic.min.css'
 
 const Details = () => {
     const { currentUser, logoutUser } = useAuth()
@@ -90,7 +91,7 @@ const Details = () => {
                 <img src={user.profileImage}/>
                 <div className="ui card">
                     <div className="content">
-                        <div className="header">{user.name}</div>
+                        <div className="head">{user.name}</div>
                         <div className="meta">UIUC student/faculty certification: {verified}</div>
                         {currentUser
                             ?

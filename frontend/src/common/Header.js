@@ -2,7 +2,7 @@ import { Fragment } from "react"
 import { Link } from "react-router-dom"
 import { useAuth } from "../common/AuthContext"
 import './Header.css'
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const Header = () => {
     const { currentUser, logoutUser } = useAuth()
@@ -19,18 +19,16 @@ const Header = () => {
     }
 
     return (
-        <header className='headerMine'>
+        <header className='header'>
             <Link to='/' className='link-heading'><h1>Flea Illinois</h1></Link>
             <form className='form-search-bar'>
-            <input
-                type="search"
-                onChange={event => handleQueryChange(event.target.value)}
-                placeholder="search items here"
-                id='input-search-bar'
-            />
-            <Link to={`/?name=${queryInput}`} className="link-heading"> search </Link>
-
-
+                <input
+                    type="search"
+                    onChange={event => handleQueryChange(event.target.value)}
+                    placeholder="search items here"
+                    id='input-search-bar'
+                />
+                <Link to={`/?name=${queryInput}`} className="link-heading" id="link-search-btn"> search </Link>
             </form>
             <div className="container-headings">
                 {currentUser 
