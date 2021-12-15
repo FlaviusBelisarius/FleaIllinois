@@ -11,7 +11,6 @@ import Gallery from './gallery/Gallery.jsx'
 import Post from './post/Post'
 import AuthContextProvider from './common/AuthContext'
 import Header from './common/Header'
-import 'semantic-ui-css/semantic.min.css'
 
 function App() {
   return (

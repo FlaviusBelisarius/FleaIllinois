@@ -1,44 +1,30 @@
-.headerMine {
+.header {
     width: 100vw;
     display: flex;
     align-items: center;
     justify-content: space-around;
-    background-color: #181c44;
-    border-radius: 25px; 
-    position: fixed
+    background-color: #5a716a;
 }
 
 /* .header .form-search-bar {
     width: 25%;
 } */
 
-.headerMine .form-search-bar #input-search-bar{
+.header .form-search-bar #input-search-bar{
     width: 300px;
 }
 
-.headerMine .container-headings{
+.header .container-headings{
     display: flex;
-    font-family: "Helvetica Neue", "Arial", sans-serif;
-    font-style: italic;
-    font-weight: 100;
-    font-variant-ligatures: normal;
+
 }
 
-.headerMine .link-heading{
+.header .link-heading{
     text-decoration: none;
-    color: rgb(236, 142, 18);
-    font-family: "Helvetica Neue", "Arial", sans-serif;
-    font-style: italic;
-    font-weight: 100;
-    font-variant-ligatures: normal;
+    color: black;
 }
 
-.headerMine .link-heading:hover{
-    background-color: black;
-    color: rgb(219, 152, 6);
-}
-
-.headerMine .container-headings .link-heading{
+.header .container-headings .link-heading{
     padding: 0 10px;
-    color: rgb(228, 147, 27);
+    color: white;
 }
