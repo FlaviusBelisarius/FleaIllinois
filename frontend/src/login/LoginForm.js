@@ -48,7 +48,7 @@ const LoginForm = () => {
                     </div>
                     {isLoading
                         ?<Link to="" className="link-submit" onClick={handleSubmit}> Loading</Link>
-                        :<Link to="" className="link-submit" onClick={handleSubmit}> Login</Link>
+                        :<Link to="" className="link-submit" onClick={handleSubmit}> Login to Account</Link>
                     }
                     
             </div>
