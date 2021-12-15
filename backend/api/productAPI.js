@@ -14,7 +14,7 @@ function parseQuery(condition) {
 function parseQuery_where(condition) {
     if (typeof condition !== 'undefined'){
         var temp = JSON.parse(condition)
-        temp.productName = new RegExp(temp.productName)
+        temp.productName = new RegExp(temp.productName, "i")
         return temp;
     }
     return condition;

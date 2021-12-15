@@ -27,7 +27,12 @@ const Details = () => {
     }
 
     const fetchProducts = async () => {
-        var productAddress = "http://localhost:4000/api/products" + window.location.href.slice(29)
+        if(window.location.href.slice(7,8)==='l'){
+            var productAddress = "http://localhost:4000/api/products" + window.location.href.slice(29)
+        }
+        else{
+            var productAddress = "http://localhost:4000/api/products" + window.location.href.slice(32)
+        }
         axios.get(productAddress)
             .then(productResponse => {
                 var sellerAddress = "http://localhost:4000/api/users/"+productResponse.data.data.sellerID
