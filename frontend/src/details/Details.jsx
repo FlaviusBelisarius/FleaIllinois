@@ -4,13 +4,26 @@ import { Button, Comment, Form} from 'semantic-ui-react';
 import { useAuth } from "../common/AuthContext"
 import { React, useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-
+import Constant from "../common/Constant"
 
 const Details = () => {
     const { currentUser, logoutUser } = useAuth()
     const [product, setProduct] = useState({})
     const [user, setUser] = useState({})
     const [commentList, setCommentList] = useState([])
+    const [comment, setComment] = useState("")
+    const [error, setError] = useState('')
+    const [tag, setTag] = useState(1)
+
+    const handleCommentChange = (comment) => {
+        axios.get(`http://localhost:4000/api/users?where={"uid":"${currentUser.uid}"}`)
+            .then(res => {
+                var commenterName = res.data.data[0].name
+                setComment(commenterName + '#' + new Date().toDateString() + '#' +comment);
+            })
+        
+        
+    }
 
     const fetchProducts = async () => {
         var productAddress = "http://localhost:4000/api/products" + window.location.href.slice(29)
@@ -30,9 +43,30 @@ const Details = () => {
             });
     }
 
+    const handleUpload = async (e) => {
+        e.preventDefault()
+        setError('')
+        if (comment === ""){
+            return setError("Please make a comment.")
+        }
+
+        try{
+            product.commentList.push(comment)
+            let newProduct = {
+                commentList: product.commentList
+            }
+            const resp = await axios.put(`${Constant.API_BASE}/products/${product._id}`, newProduct)
+            setTag(tag+1)
+            console.log(resp)
+        } catch (err) {
+            console.log(err.message)
+        }
+    }
+
+
     useEffect (() => {
         fetchProducts()
-    }, [useLocation()])
+    }, [useLocation(), tag])
 
     var verified = ""
     if(user.verified){
@@ -49,18 +83,18 @@ const Details = () => {
                     <img id="photo" src={product.productImage}/>
                     {/* <img src="https://assets.nintendo.com/image/upload/b_white,c_pad,f_auto,h_382,q_auto,w_573/ncom/en_US/switch/site-design-update/hardware/switch/nintendo-switch-oled-model-white-set/gallery/image03?v=2021112423"/> */}
                     <h1>{product.productName}</h1>
-                    <p class="lead">{product.productDescription}</p>
+                    <p className="lead">{product.productDescription}</p>
                 </div>
             </section>
             <section id = "seller-info">
                 <img src={user.profileImage}/>
-                <div class="ui card">
-                    <div class="content">
-                        <div class="header">{user.name}</div>
-                        <div class="meta">UIUC student/faculty certification: {verified}</div>
+                <div className="ui card">
+                    <div className="content">
+                        <div className="header">{user.name}</div>
+                        <div className="meta">UIUC student/faculty certification: {verified}</div>
                         {currentUser
                             ?
-                            <div class="description">Cell phone: {cellphone}<br></ br>Email: {user.email}</div>
+                            <div className="description">Cell phone: {cellphone}<br></ br>Email: {user.email}</div>
                             :
                             <div></div>
                         }
@@ -72,21 +106,32 @@ const Details = () => {
                 ? 
                 <div>
                     <Comment.Group>
-                        {commentList.map(comment => (
-                            <Comment>
-                                <Comment.Content>
-                                    <Comment.Author as='a'>{comment.split("#")[0]}</Comment.Author>
-                                    <Comment.Metadata>
-                                        <div>{comment.split("#")[1]}</div>
-                                    </Comment.Metadata>
-                                    <Comment.Text>{comment.split("#")[2]}</Comment.Text>
-                                </Comment.Content>
-                            </Comment>
-                        ))}
+                        {commentList.map(function(comment, i){
+                            return(
+                                <Comment key = {i}>
+                                    <Comment.Content>
+                                        <Comment.Author as='a'>{comment.split("#")[0]}</Comment.Author>
+                                        <Comment.Metadata>
+                                            <div>{comment.split("#")[1]}</div>
+                                        </Comment.Metadata>
+                                        <Comment.Text>{comment.split("#")[2]}</Comment.Text>
+                                    </Comment.Content>
+                                </Comment>  
+                            )
+                        }
+                        )}
                     </Comment.Group>
                     <Form reply>
-                        <Form.TextArea />
-                        <Button content='Add Comment' labelPosition='left' icon='edit' primary />
+                        <Form.TextArea 
+                        placeholder="Write your comments here." 
+                        onChange={event => handleCommentChange(event.target.value)}
+                        />
+                        <Button 
+                        content='Add Comment' 
+                        labelPosition='left' 
+                        icon='edit' 
+                        onClick={handleUpload}
+                        primary />
                     </Form>
                 </div>
                 :
