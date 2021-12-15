@@ -74,7 +74,10 @@ const LoginForm = () => {
                         <label htmlFor="confirm-password">Confirm Password</label>
                         <input type="password" name="confirm-password" id="confirm-password" onChange={e => setConfirmPassword(e.target.value)}/>
                     </div>
-                    <input type="checkbox" onClick={toggle}/>Show Password
+                    <div className="container-show-password">
+                        <label htmlFor="">Show Password</label>
+                        <input type="checkbox" onClick={toggle}/>
+                    </div>
                     {isLoading
                         ?<Link to="" className="link-submit" onClick={handleSubmit}> Loading</Link>
                         :<Link to="" className="link-submit" onClick={handleSubmit}>Create Account</Link>

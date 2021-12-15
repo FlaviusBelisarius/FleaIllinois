@@ -1,44 +1,43 @@
-.headerMine {
+.header {
     width: 100vw;
     display: flex;
     align-items: center;
     justify-content: space-around;
-    background-color: #181c44;
-    border-radius: 25px; 
-    position: fixed
+    background-color: #13294B;
+    padding: 20px 0;
 }
 
-/* .header .form-search-bar {
-    width: 25%;
-} */
+.header .form-search-bar {
+    display: flex;
+    align-items: center;
+}
 
-.headerMine .form-search-bar #input-search-bar{
+#input-search-bar{
     width: 300px;
 }
 
-.headerMine .container-headings{
+.header .container-headings{
     display: flex;
-    font-family: "Helvetica Neue", "Arial", sans-serif;
-    font-style: italic;
-    font-weight: 100;
-    font-variant-ligatures: normal;
+
 }
 
-.headerMine .link-heading{
+.link-heading {
+    color: white;
     text-decoration: none;
-    color: rgb(236, 142, 18);
-    font-family: "Helvetica Neue", "Arial", sans-serif;
-    font-style: italic;
-    font-weight: 100;
-    font-variant-ligatures: normal;
+
 }
 
-.headerMine .link-heading:hover{
-    background-color: black;
-    color: rgb(219, 152, 6);
+.header .container-headings .link-heading:hover{
+    background-color: #E84A27;
+    color: #13294B;
 }
 
-.headerMine .container-headings .link-heading{
-    padding: 0 10px;
-    color: rgb(228, 147, 27);
+.header .container-headings .link-heading{
+    padding: 10px;
+}
+
+#link-search-btn{
+    background-color: #E84A27;
+    padding: 2px 6px;
+    color: #13294B;
 }

@@ -30,7 +30,7 @@ const User = () => {
             <div className="container-user-history">
                 <div className="container-user-tabs">
                     {/* <Link to='/' className='link-user-tabs'>My Purchase</Link> */}
-                    <Link to='' className='link-user-tabs'>My Sell</Link>
+                    <h3 className='link-user-tabs'>My Sell</h3>
                 </div>
                 <div className="container-products-list">
                     {!loading && selling.map((product) => (
