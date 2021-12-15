@@ -80,7 +80,6 @@ const Details = () => {
     }else{
         verified = "No"
     }
-    var cellphone = "N/A"
     
     return (
         <div className="div">
@@ -89,6 +88,7 @@ const Details = () => {
                     <img id="photo" src={product.productImage}/>
                     {/* <img src="https://assets.nintendo.com/image/upload/b_white,c_pad,f_auto,h_382,q_auto,w_573/ncom/en_US/switch/site-design-update/hardware/switch/nintendo-switch-oled-model-white-set/gallery/image03?v=2021112423"/> */}
                     <h1>{product.productName}</h1>
+                    <h1>Price: {product.productPrice} dollars</h1>
                     <p className="lead">{product.productDescription}</p>
                 </div>
             </section>
@@ -100,7 +100,7 @@ const Details = () => {
                         <div className="meta">UIUC student/faculty certification: {verified}</div>
                         {currentUser
                             ?
-                            <div className="description">Cell phone: {cellphone}<br></ br>Email: {user.email}</div>
+                            <div className="description">Cell phone: {user.phoneNumber}<br></ br>Email: {user.email}</div>
                             :
                             <div></div>
                         }
