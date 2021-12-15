@@ -1,16 +1,15 @@
 import { Link } from 'react-router-dom'
 import './ProductListItem.css'
 
-const ProductListItem = () => {
+const ProductListItem = ({ product }) => {
     return (
         <div className="product-list-item">
-            <img className="img-product" src="http://via.placeholder.com/200x200" alt="" />
+            <img className="img-product" src={product.productImage} alt="" />
             <div className="product-detail">
-                <p>Product Name</p>
-                <p>Product Name</p>                            
-                <Link to='/'>View Detail</Link>                            
+                <p>{product.productName}</p>
+                <Link to={`/details/${product._id}`}>View Detail</Link>                            
             </div>
-            <p className="product-date">Date</p>
+            <p className="product-date">{product.dateCreated}</p>
         </div>
     )
 }
