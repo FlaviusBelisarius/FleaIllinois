@@ -28,7 +28,7 @@ const Header = () => {
                     placeholder="search items here"
                     id='input-search-bar'
                 />
-                <Link to={`/?name=${queryInput}`} className="link-heading"> search </Link>
+                <Link to={`/?name=${queryInput}`} className="link-heading" id="link-search-btn"> search </Link>
             </form>
             <div className="container-headings">
                 {currentUser 
