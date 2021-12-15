@@ -4,6 +4,7 @@
     align-items: center;
     justify-content: space-around;
     background-color: #13294B;
+    padding: 20px 0;
 }
 
 .header .form-search-bar {
@@ -26,7 +27,7 @@
 
 }
 
-.link-heading:hover{
+.header .container-headings .link-heading:hover{
     background-color: #E84A27;
     color: #13294B;
 }

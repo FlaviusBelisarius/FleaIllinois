@@ -1,5 +1,5 @@
 .Post{
-  margin-top: 20%;
+  margin-top: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,23 +10,25 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  border: 4px solid #13294B;
+  border-radius: 20px;
 }
-
-.form-group{
-  font-family: "Helvetica Neue", "Arial", sans-serif;
-  font-style: italic;
-  font-weight: 100;
-  font-variant-ligatures: normal;
-}
-
 
 .container-post .form-group{
-  padding: 10px 0;
+  padding: 20px 0;
 }
 
 .container-post .link-submit{
   width: 40%;
   text-align: center;
-  background-color: #181c44;
+  background-color: #13294B;
   color: white;
+  padding: 10px 0;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.link-submit:hover{
+  background-color: #E84A27;
+  color: #13294B;
 }
