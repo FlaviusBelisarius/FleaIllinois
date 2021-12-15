@@ -42,10 +42,8 @@ const Post = () => {
                 image: imageUrl,
                 sellerID: currentUser.uid
             }
-            console.log(newProduct)
             const resp = await axios.post(`${Constant.API_BASE}/products`, newProduct)
-            console.log(resp)
-            navigate('/')
+            navigate(`/details/${resp.data.data._id}`)
         } catch (err) {
             console.log(err.message)
         }
