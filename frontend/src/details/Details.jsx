@@ -136,7 +136,19 @@ const Details = () => {
                     </Form>
                 </div>
                 :
-                <div></div>
+                <div>
+                    <Form reply>
+                        <Form.TextArea 
+                        placeholder="Write your comments here." 
+                        />
+                        <Button
+                        id="disabled-button" 
+                        content='Add Comment' 
+                        labelPosition='left' 
+                        icon='edit' 
+                        primary />
+                    </Form>
+                </div>
             }
             </section>
         </div>
