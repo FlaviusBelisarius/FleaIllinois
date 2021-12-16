@@ -41,6 +41,8 @@ Based on the assessment as well as considering the user experience, we designed 
 
 #### Access via http://3.145.57.231:4000/
 
+This is not the hosted page of our project, this is only for backend. 
+
 #### Tools/framework
 
 **Database service:** 
@@ -120,6 +122,8 @@ http://localhost:4000/api/users?sort={"name": 1}&skip=60&limit=20
 ## 5. Frontend implementation
 
 #### Access via http://3.145.57.231:3000/
+
+This is also the hosted page of our project please visit this page for playing with our project. We deployed our project on Amazon AWS server.  
 
 #### Tools/framework
 
