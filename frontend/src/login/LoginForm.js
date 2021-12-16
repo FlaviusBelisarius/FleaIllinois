@@ -8,16 +8,20 @@ const LoginForm = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState('')
+
     const { loginUser } = useAuth()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        setError('')
         try {
             setIsLoading(true)
             await loginUser(email, password)
             navigate('/')
         } catch (err) {
             console.log(err.message)
+            setError(err.message)
         }
         setIsLoading(false)
     }
@@ -50,7 +54,7 @@ const LoginForm = () => {
                         ?<Link to="" className="link-submit" onClick={handleSubmit}> Loading</Link>
                         :<Link to="" className="link-submit" onClick={handleSubmit}> Login to Account</Link>
                     }
-                    
+                    {error && <p>{error}</p>}
             </div>
         </form>
     )
