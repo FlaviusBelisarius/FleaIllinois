@@ -33,7 +33,7 @@ Based on the assessment as well as considering the user experience, we designed 
 - **Message board:** Registered users if interested in the products can leave messages in the message board at the product details page. The sellers can reply and answer any questions accordingly. This functionality offers a seamless interaction between the buyers and the sellers without disturbing the private contact information before making purchase decision. 
 
 ## 3. User flow
-![User flow](https://gitlab.com/JerryNie/fleaillinois/-/blob/readme/user_flow.png)
+![User flow](https://gitlab.com/JerryNie/fleaillinois/-/blob/staging/user_flow.png)
 
 ## 4. Backend implementation
 
