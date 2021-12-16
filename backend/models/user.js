@@ -22,7 +22,7 @@ var UserSchema = new mongoose.Schema({
     },
     phoneNumber: {
         type: String,
-        default: ""
+        default: "N/A"
     },
     profileImage: {
         type: String,

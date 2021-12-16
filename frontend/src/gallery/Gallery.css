@@ -3,6 +3,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+<<<<<<< HEAD
+=======
+    background-color: white;
+>>>>>>> bb2533c2db08959f2e48a7080063ea2f0fb4781f
 }
 
 .container-gallery {

@@ -1,12 +1,12 @@
 import { Fragment } from "react"
-import { Link } from "react-router-dom"
+import { Link , useNavigate } from "react-router-dom"
 import { useAuth } from "../common/AuthContext"
 import './Header.css'
 import { useState } from "react";
 
 const Header = () => {
+    const navigate = useNavigate()
     const { currentUser, logoutUser } = useAuth()
-    console.log("user: ", currentUser)
 
     const [queryInput, setQueryInput] = useState("")
     const handleQueryChange = (input) => {
@@ -16,6 +16,7 @@ const Header = () => {
     const handleLogout = (e) => {
         e.preventDefault()
         logoutUser()
+        navigate(`/`)
     }
 
     return (
