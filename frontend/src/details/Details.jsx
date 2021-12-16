@@ -17,7 +17,7 @@ const Details = () => {
     const [tag, setTag] = useState(1)
 
     const handleCommentChange = (comment) => {
-        axios.get(`http://localhost:4000/api/users?where={"uid":"${currentUser.uid}"}`)
+        axios.get(`${Constant.API_BASE}/users?where={"uid":"${currentUser.uid}"}`)
             .then(res => {
                 var commenterName = res.data.data[0].name
                 setComment(commenterName + '#' + new Date().toDateString() + '#' +comment);
@@ -28,14 +28,14 @@ const Details = () => {
 
     const fetchProducts = async () => {
         if(window.location.href.slice(7,8)==='l'){
-            var productAddress = "http://localhost:4000/api/products" + window.location.href.slice(29)
+            var productAddress = `${Constant.API_BASE}/products` + window.location.href.slice(29)
         }
         else{
-            var productAddress = "http://localhost:4000/api/products" + window.location.href.slice(32)
+            var productAddress = `${Constant.API_BASE}/products` + window.location.href.slice(32)
         }
         axios.get(productAddress)
             .then(productResponse => {
-                var sellerAddress = "http://localhost:4000/api/users/"+productResponse.data.data.sellerID
+                var sellerAddress = `${Constant.API_BASE}/users/`+productResponse.data.data.sellerID
                 axios.get(sellerAddress)
                     .then(sellerPesponse => {
                         setUser(sellerPesponse.data.data);
@@ -64,7 +64,6 @@ const Details = () => {
             const resp = await axios.put(`${Constant.API_BASE}/products/${product._id}`, newProduct)
             setTag(tag+1)
             console.log(resp)
-            window.location.reload();
         } catch (err) {
             console.log(err.message)
         }
