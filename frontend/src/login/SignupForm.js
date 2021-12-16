@@ -12,12 +12,14 @@ const LoginForm = () => {
     const [name, setName] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
     const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState('')
     const { registerUser } = useAuth()
 
     const handleSubmit = async (e) => {
+        setError('')
         e.preventDefault()
         if (password !== confirmPassword){
-            return console.log("password does not match")
+            return setError("Password does not match")
         }
         try {
             setIsLoading(true)
@@ -32,6 +34,7 @@ const LoginForm = () => {
             navigate('/')
         } catch (err) {
             console.log(err.message)
+            setError(err.message)
         }
         setIsLoading(false)
     }
@@ -82,6 +85,7 @@ const LoginForm = () => {
                         ?<Link to="" className="link-submit" onClick={handleSubmit}> Loading</Link>
                         :<Link to="" className="link-submit" onClick={handleSubmit}>Create Account</Link>
                     }
+                    {error && <p>{error}</p>}
             </div>
         </form>
     )
