@@ -19,13 +19,13 @@
 We initialized the Flea Illinois application in observing the increasing demand of saving money and rising awareness of environmental sustainablility. Flea Illinois is a second-hand exchange platform, which aims to offer better experience that cannot be fulfilled by the available applications in the market. Currently, Flea Illinois focuses on serving Champaign-Urbana students and residents. The application may be extended to other regions when applicable. 
 
 ## 2. Design and functionality
-We assessed the current available applications in the market to supplement our study in designing the functionalities. eBay is one of the biggest platforms for second-hand businesses, but it does not provide user verification that inreases the chance of fake information, nor does it provide convenient local transactions that increase the money spending on mailing. For some local second-hand groups, for example, The Free & For Sale UIUC Facebook group, they do not verify user information as well. Besides, functions like item updating and searching are not user-friendly. 
+We assessed the current available applications in the market to supplement our study in designing the functionalities. eBay is one of the biggest platforms for second-hand businesses, but it does not provide user verification that inreases the chance of fake information, nor does it provide convenient local transactions that increase the money spending on mailing. For some local second-hand groups, for example, the Free & For Sale UIUC Facebook group, they do not verify user information as well. Besides, functions like item searching are not user-friendly. 
 
-Based on the assessment as well as considering the user experience, we designed three core functionalities in resolving the problems encountered in current applications:
+Based on the assessment as well as considering the user experience, we designed four core functionalities in resolving the problems encountered in current applications:
 
 - **User verification:** New users' identifications will be verified by their email addresses and assigned a verification tag accordingly, which is visible to everybody. Students with univerisity email addresses are assigned an "verified" tag. Local residents are also welcome to use this app but are assigned an "unverified" tag initially until their identities and residences are confirmed. This verification function allows our users to buy, sell, and exchange more transparently, reducing the chances of scam and/or deceived information.
 
-- **Easy post and update:** Registered users can post their items on the Flea Illinois webpage with clear instructions. The post will not be approved if the product name and price are not completed. Product photos can be uploaded and are highly encouraged. If needed, users can update the relevant information of their items easily. When the items are sold, users can mark the product status as sold, which will no longer be shown as available. 
+- **Easy post and update:** Registered users can post their items on the Flea Illinois webpage with clear instructions. The post will not be approved if missing information. Product photos can be uploaded and are highly encouraged. When the items are sold, users can mark the product status as sold, which will no longer be shown as available. 
 
 - **Simple search and view:** Users can browse available items in the gallary and also search specific items by keywords. The returned list of items can be sorted by price and/or released date in ascending or descending order. When an item is clicked, detailed informatioin about the product will be displayed.
 
@@ -49,18 +49,17 @@ Based on the assessment as well as considering the user experience, we designed 
 
 **Here is the User Schema:**
 
-1. "name" - String - required
-2. "email" - String - required
+1. "name" - String
+2. "email" - String
 3. "verified" - Boolean
 4. "phoneNumber" - String
 5. "profileImage" - String - stores the image link
 
 **Here is the Product Schema:**
 
-1. "productName" - String - required
-2. "productDescription" - String
-3. "productPrice" - Number - required
-4. "productImage" - String
+1. "productName" - String
+2. "productDescription"
+3. "productPrice" - Number
 5. "sellerID" - String
 6. "forSell" - Boolean
 7. "dateCreated" - Date - should be set automatically by server to present date
@@ -135,10 +134,11 @@ http://localhost:4000/api/users?sort={"name": 1}&skip=60&limit=20
 
 | Page | Actions |
 |----------|---------|
-| login page    | /        |
+| login page    | /login        |
 | user page     | /user    |
-| product page  | /product |
-| gallery       |          |
+| product detail view  | /details/product:id |
+| gallery view      | /         |
+| post page       | /post         |
 
 
 ## 5. Getting started locally
