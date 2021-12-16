@@ -3,14 +3,13 @@
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
-    row-gap: 100px;
-    column-gap: 200px;
+    row-gap: 3rem;
     /*justify-content: space-evenly */
 }
 
 #intro{
-    margin: 5% 5% 0 5%;
-    width: 50%;
+    margin: 5% 0 0 5%;
+    width: 60%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -28,7 +27,6 @@
 #seller-info img {
     height: 12rem;
     width: 12rem;
-    width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,7 +34,6 @@
 
 #comments{
     margin: auto;
-    width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
