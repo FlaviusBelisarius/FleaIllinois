@@ -11,9 +11,10 @@
 ## Table of Contents
 1. [Introduction](#introduction)
 2. [Design and functionality](#design-and-functionality)
-3. [Backend implementation](#backend-implementation)
-4. [Frontend implementation](#frontend-implementation)
-5. [Getting started locally](#getting-started-locally)
+3. [User flow](#user-flow)
+4. [Backend implementation](#backend-implementation)
+5. [Frontend implementation](#frontend-implementation)
+6. [Getting started locally](#getting-started-locally)
 
 ## 1. Introduction
 We initialized the Flea Illinois application in observing the increasing demand of saving money and rising awareness of environmental sustainablility. Flea Illinois is a second-hand exchange platform, which aims to offer better experience that cannot be fulfilled by the available applications in the market. Currently, Flea Illinois focuses on serving Champaign-Urbana students and residents. The application may be extended to other regions when applicable. 
@@ -31,7 +32,10 @@ Based on the assessment as well as considering the user experience, we designed 
 
 - **Message board:** Registered users if interested in the products can leave messages in the message board at the product details page. The sellers can reply and answer any questions accordingly. This functionality offers a seamless interaction between the buyers and the sellers without disturbing the private contact information before making purchase decision. 
 
-## 3. Backend implementation
+## 3. User flow
+
+
+## 4. Backend implementation
 
 #### Access via http://3.145.57.231:4000/
 
@@ -111,7 +115,7 @@ Here are some example queries and what they would return:
 http://localhost:4000/api/users?sort={"name": 1}&skip=60&limit=20
 ```
 
-## 4. Frontend implementation
+## 5. Frontend implementation
 
 #### Access via http://3.145.57.231:3000/
 
@@ -141,7 +145,7 @@ http://localhost:4000/api/users?sort={"name": 1}&skip=60&limit=20
 | post page       | /post         |
 
 
-## 5. Getting started locally
+## 6. Getting started locally
 1. Clone the repository:
 `git clone https://gitlab.com/JerryNie/fleaillinois.git fleaillinois`, then `cd fleaillinois`
 2. Install dependencies in both backend and frontend:
