@@ -58,9 +58,6 @@ const ProductListItem = ({ product }) => {
             <img className="img-product" src={product.productImage} alt="" />
             <div className="product-detail">
                 <h2 className='h2-user-product'>{product.productName}</h2>
-<<<<<<< HEAD
-                <Link to={`/details/${product._id}`} className='link-detail'>View Detail</Link>                            
-=======
                 <Link to={`/details/${product._id}`} className='link-detail'>View Detail</Link>     
                 {product.forSell
                 ?
@@ -71,7 +68,6 @@ const ProductListItem = ({ product }) => {
                 <Link to='/user' onClick={handleUpload_delete} className='link-detail'>Delete</Link>  
                 
 
->>>>>>> bb2533c2db08959f2e48a7080063ea2f0fb4781f
             </div>
             <p className="product-date">{product.dateCreated.slice(0,10)}</p>
         </div>
