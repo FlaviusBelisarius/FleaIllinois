@@ -64,6 +64,7 @@ const Details = () => {
             const resp = await axios.put(`${Constant.API_BASE}/products/${product._id}`, newProduct)
             setTag(tag+1)
             console.log(resp)
+            window.location.reload();
         } catch (err) {
             console.log(err.message)
         }
