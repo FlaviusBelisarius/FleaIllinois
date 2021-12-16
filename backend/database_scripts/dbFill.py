@@ -8,6 +8,8 @@
  * @date Created: Spring 2015
  * @date Modified: Spring 2015
  * @date Modified: Spring 2019
+
+ dbfill command: python3 dbFill.py -u "localhost" -p 4000 -n 20 -t 100
 """
 
 import sys
@@ -43,7 +45,7 @@ def main(argv):
 
     # Number of POSTs that will be made to the server
     userCount = 50
-    taskCount = 200
+    productCount = 200
 
     try:
         opts, args = getopt.getopt(argv,"hu:p:n:t:",["url=","port=","users=","tasks="])
@@ -61,7 +63,7 @@ def main(argv):
         elif opt in ("-n", "--users"):
              userCount = int(arg)
         elif opt in ("-t", "--tasks"):
-             taskCount = int(arg)
+             productCount = int(arg)
 
     # Python array containing common first names and last names
     firstNames = ["james","john","robert","michael","william","david","richard","charles","joseph","thomas","christopher","daniel","paul","mark","donald","george","kenneth","steven","edward","brian","ronald","anthony","kevin","jason","matthew","gary","timothy","jose","larry","jeffrey","frank","scott","eric","stephen","andrew","raymond","gregory","joshua","jerry","dennis","walter","patrick","peter","harold","douglas","henry","carl","arthur","ryan","roger","joe","juan","jack","albert","jonathan","justin","terry","gerald","keith","samuel","willie","ralph","lawrence","nicholas","roy","benjamin","bruce","brandon","adam","harry","fred","wayne","billy","steve","louis","jeremy","aaron","randy","howard","eugene","carlos","russell","bobby","victor","martin","ernest","phillip","todd","jesse","craig","alan","shawn","clarence","sean","philip","chris","johnny","earl","jimmy","antonio","danny","bryan","tony","luis","mike","stanley","leonard","nathan","dale","manuel","rodney","curtis","norman","allen","marvin","vincent","glenn","jeffery","travis","jeff","chad","jacob","lee","melvin","alfred","kyle","francis","bradley","jesus","herbert","frederick","ray","joel","edwin","don","eddie","ricky","troy","randall","barry","alexander","bernard","mario","leroy","francisco","marcus","micheal","theodore","clifford","miguel","oscar","jay","jim","tom","calvin","alex","jon","ronnie","bill","lloyd","tommy","leon","derek","warren","darrell","jerome","floyd","leo","alvin","tim","wesley","gordon","dean","greg","jorge","dustin","pedro","derrick","dan","lewis","zachary","corey","herman","maurice","vernon","roberto","clyde","glen","hector","shane","ricardo","sam","rick","lester","brent","ramon","charlie","tyler","gilbert","gene"]
@@ -84,7 +86,8 @@ def main(argv):
         # Pick a random first name and last name
         x = randint(0,99)
         y = randint(0,99)
-        params = urllib.parse.urlencode({'name': firstNames[x] + " " + lastNames[y], 'email': firstNames[x] + "@" + lastNames[y] + ".com"})
+        z = (randint(0,10) > 4) # true or false
+        params = urllib.parse.urlencode({'name': firstNames[x] + " " + lastNames[y], 'email': firstNames[x] + "@" + lastNames[y] + ".com", 'verified': z})
 
         # POST the user
         conn.request("POST", "/api/users", params, headers)
@@ -97,60 +100,39 @@ def main(argv):
         userNames.append(str(d['data']['name']))
         userEmails.append(str(d['data']['email']))
 
-    # Open 'tasks.txt' for sample task names
-    f = open('tasks.txt','r')
-    taskNames = f.read().splitlines()
+    # Open 'products.txt' for sample product names
+    f = open('products.txt','r')
+    productNames = f.read().splitlines()
 
-    # Loop 'taskCount' number of times
-    for i in range(taskCount):
+    # Loop 'productCount' number of times
+    for i in range(productCount):
 
         # Randomly generate task parameters
-        assigned = (randint(0,10) > 4)
-        assignedUser = randint(0,len(userIDs)-1) if assigned else -1
-        assignedUserID = userIDs[assignedUser] if assigned else ''
-        assignedUserName = userNames[assignedUser] if assigned else 'unassigned'
-        assignedUserEmail = userEmails[assignedUser] if assigned else 'unassigned'
-        completed = (randint(0,10) > 5)
-        deadline = (mktime(date.today().timetuple()) + randint(86400,864000)) * 1000
-        description = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English."
-        params = urllib.parse.urlencode({'name': choice(taskNames), 'deadline': deadline, 'assignedUserName': assignedUserName, 'assignedUser': assignedUserID, 'completed': str(completed).lower(), 'description': description})
+        
+        assignedSellerIdx = randint(0,len(userIDs)-1) # seller index, product must have seller
+        assignedSellerID = userIDs[assignedSellerIdx]
+        assignedSellerName = userNames[assignedSellerIdx]
+        assignedForSell = (randint(0,10) > 2) # forSell: true or false
+        assignedPrice = randint(1,50) * 10
+        assignedDate = (mktime(date.today().timetuple()) - randint(86400,864000*4)) * 1000
+        description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Neque volutpat ac tincidunt vitae. Sed arcu non odio euismod lacinia at quis risus. Nec ultrices dui sapien eget. Non tellus orci ac auctor augue mauris augue neque. Accumsan lacus vel facilisis volutpat est."
 
-        # POST the task
-        conn.request("POST", "/api/tasks", params, headers)
+        assignedImage = "http://via.placeholder.com/200x200"
+        
+        params = urllib.parse.urlencode({'name': choice(productNames), 'description': description, 'price': assignedPrice, 'image': assignedImage, 'sellerID': assignedSellerID, 'forSell': assignedForSell, 'dataCreated': assignedDate})
+
+        # POST the product
+        conn.request("POST", "/api/products", params, headers)
         response = conn.getresponse()
         data = response.read()
         d = json.loads(data)
 
-        taskID = str(d['data']['_id'])
+        productID = str(d['data']['_id'])
 
-        # Make sure the task is added to the pending list of the user
-        if assigned and not completed:
-            # GET the correct user
-            conn.request("GET","""/api/users?where={"_id":\""""+assignedUserID+"""\"}""")
-            response = conn.getresponse()
-            data = response.read()
-            d = json.loads(data)
-
-            # Store all the user properties
-            assignedUserName = str(d['data'][0]['name'])
-            assignedUserEmail = str(d['data'][0]['email'])
-            assignedUserDate = str(d['data'][0]['dateCreated'])
-
-            # Append the new taskID to pending tasks
-            assignedUserTasks = d['data'][0]['pendingTasks']
-            assignedUserTasks = [str(x).replace('[','').replace(']','').replace("'",'').replace('"','') for x in assignedUserTasks]
-            assignedUserTasks.append(taskID)
-
-            # PUT in the user
-            params = urllib.parse.urlencode({'_id': assignedUserID, 'name': assignedUserName, 'email': assignedUserEmail, 'dateCreated': assignedUserDate, 'pendingTasks': assignedUserTasks}, True)
-            conn.request("PUT", "/api/users/"+assignedUserID, params, headers)
-            response = conn.getresponse()
-            data = response.read()
-            d = json.loads(data)
-
+    
     # Exit gracefully
     conn.close()
-    print(str(userCount)+" users and "+str(taskCount)+" tasks added at "+baseurl+":"+str(port))
+    print(str(userCount)+" users and "+str(productCount)+" products added at "+baseurl+":"+str(port))
 
 
 if __name__ == "__main__":

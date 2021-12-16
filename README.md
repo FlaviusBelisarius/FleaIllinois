@@ -1,26 +1,76 @@
-## Frontend [http://3.145.57.231:3000/](http://3.145.57.231:3000/)
-## Backend [http://3.145.57.231:4000/](http://3.145.57.231:4000/)
+# CS498RK FP: Flea Illinois
+#### December 2021
 
-# MP #3: APIed Piper
-### Due: November 10th, 2021, 11.59PM CDT
+#### Team HTML5
+- Wenshan Xiong (wenshan2)
+- Jerry Nie(runpeng3)
+- Zewei Long (zeweil2)
+- Tiancheng Jiang (tj15)
+- Chuanyue Shen (cs11)
 
 ## Table of Contents
-1. [Assignment](#assignment)
-2. [Getting Started](#getting-started)
-3. [Tips](#tips)
-4. [Rules](#rules)
-5. [Submission Details](#submission-details)
+1. [Introduction](#introduction)
+2. [Design and functionality](#design-and-functionality)
+3. [User flow](#user-flow)
+4. [Backend implementation](#backend-implementation)
+5. [Frontend implementation](#frontend-implementation)
+6. [Getting started locally](#getting-started-locally)
 
-## 1. Assignment
+## 1. Introduction
+We initialized the Flea Illinois application in observing the increasing demand of saving money and rising awareness of environmental sustainablility. Flea Illinois is a second-hand exchange platform, which aims to offer better experience that cannot be fulfilled by the available applications in the market. Currently, Flea Illinois focuses on serving Champaign-Urbana students and residents. The application may be extended to other regions when applicable. 
 
-**The Basic Goal** : Create an API for a task management / todo list.
+## 2. Design and functionality
+We assessed the current available applications in the market to supplement our study in designing the functionalities. eBay is one of the biggest platforms for second-hand businesses, but it does not provide user verification that inreases the chance of fake information, nor does it provide convenient local transactions that increase the money spending on mailing. For some local second-hand groups, for example, the Free & For Sale UIUC Facebook group, they do not verify user information as well. Besides, functions like item searching are not user-friendly. 
 
-**The Fun Goal** : Imagine your hot new startup, Llama.io, is creating the best todo webapp on the market. You're competing in a crowded space with hot players like Asana, Wunderlist, Google Keep, etc, so your API has to be top-notch.
+Based on the assessment as well as considering the user experience, we designed four core functionalities in resolving the problems encountered in current applications:
 
-#### Task
+- **User verification:** New users' identifications will be verified by their email addresses and assigned a verification tag accordingly, which is visible to everybody. Students with univerisity email addresses are assigned an "verified" tag. Local residents are also welcome to use this app but are assigned an "unverified" tag initially until their identities and residences are confirmed. This verification function allows our users to buy, sell, and exchange more transparently, reducing the chances of scam and/or deceived information.
 
- Implement an API with the following end-points (they would be preceded by something like http://localhost:4000/api/). Your implementation should use Node, Express and Mongoose.
+- **Easy post and update:** Registered users can post their items on the Flea Illinois webpage with clear instructions. The post will not be approved if missing information. Product photos can be uploaded and are highly encouraged. When the items are sold, users can mark the product status as sold, which will no longer be shown as available. 
 
+- **Simple search and view:** Users can browse available items in the gallary and also search specific items by keywords. The returned list of items can be sorted by price and/or released date in ascending or descending order. When an item is clicked, detailed informatioin about the product will be displayed.
+
+- **Message board:** Registered users if interested in the products can leave messages in the message board at the product details page. The sellers can reply and answer any questions accordingly. This functionality offers a seamless interaction between the buyers and the sellers without disturbing the private contact information before making purchase decision. 
+
+## 3. User flow
+![User flow](https://gitlab.com/JerryNie/fleaillinois/-/blob/staging/user_flow.png)
+
+## 4. Backend implementation
+
+#### Access via http://3.145.57.231:4000/
+
+#### Tools/framework
+
+**Database service:** 
+- MongoDB Atlas
+
+**API framework:** 
+- Node
+- Express
+- Mongoose
+
+#### Data schema
+
+**Here is the User Schema:**
+
+1. "name" - String
+2. "email" - String
+3. "verified" - Boolean
+4. "phoneNumber" - String
+5. "profileImage" - String - stores the image link
+
+**Here is the Product Schema:**
+
+1. "productName" - String
+2. "productDescription"
+3. "productPrice" - Number
+5. "sellerID" - String
+6. "forSell" - Boolean
+7. "dateCreated" - Date - should be set automatically by server to present date
+
+### API buildup
+
+We implemented an API with the following end-points (preceded by http://3.145.57.231:4000/). 
 
 | Endpoints| Actions | Intended Outcome                                    |
 |----------|---------|-----------------------------------------------------|
@@ -29,13 +79,13 @@
 | users/:id| GET     | Respond with details of specified user or 404 error |
 |          | PUT     | Replace entire user with supplied user or 404 error |
 |          | DELETE  | Delete specified user or 404 error                  |
-| tasks    | GET     | Respond with a List of tasks                        |
-|          | POST    | Create a new task. Respond with details of new task |
-| tasks/:id| GET    | Respond with details of specified task or 404 error  |
-|          | PUT     | Replace entire task with supplied task or 404 error |
-|          | DELETE  | Delete specified user or 404 error                  |
+| products    | GET     | Respond with a List of products                        |
+|          | POST    | Create a new product. Respond with details of new product |
+| products/:id| GET    | Respond with details of specified product or 404 error  |
+|          | PUT     | Replace product information with updated information or 404 error |
+|          | DELETE  | Delete specified product or 404 error                  |
 
-**NOTE**: In addition, the API has the following JSON encoded query string parameters for the GET requests to the `users` and `tasks` endpoints:
+**NOTE**: In addition, the API has the following JSON encoded query string parameters for the GET requests to the `users` and `products` endpoints:
 
 | Parameter | Description                                                                                  |
 |----------|----------------------------------------------------------------------------------------------|
@@ -43,128 +93,63 @@
 | sort     | specify the order in which to sort each specified field  (1- ascending; -1 - descending)     |
 | select   | specify the set of fields to include or exclude in each document  (1 - include; 0 - exclude) |
 | skip     | specify the number of results to skip in the result set; useful for pagination               |
-| limit    | specify the number of results to return (default should be 100 for tasks and unlimited for users)                    |
+| limit    | specify the number of results to return                                                      |
 | count    | if set to true, return the count of documents that match the query (instead of the documents themselves)                    |
 
 Here are some example queries and what they would return:
 
 | Query                                                                                | Description                                             |
 |-----------------------------------------------------------------------------------------|---------------------------------------------------------|
-| `http://localhost:4000/api/tasks`                          | Returns full list of  tasks                       |
+| `http://localhost:4000/api/products`                          | Returns full list of  products                       |
 | `http://localhost:4000/api/users`                          | Returns full list of users                       |
 | `http://localhost:4000/api/users?where={"_id": "55099652e5993a350458b7b7"}`         | Returns a list with a single user with the specified ID ('_id' will be different) |
-| `http://localhost:4000/api/tasks?where={"completed": true}`                          | Returns a list of completed tasks                       |
-| `http://localhost:4000/api/tasks?where={"_id": {"$in": ["59f930d6b1596b0cb3e82953","5a1b6d7bd72ba9106fe9239c"]}}` | Returns a set of tasks                                  |
+| `http://localhost:4000/api/products?where={"forSell": true}`                          | Returns a list of forSell products                       |
+| `http://localhost:4000/api/products?where={"_id": {"$in": ["59f930d6b1596b0cb3e82953","5a1b6d7bd72ba9106fe9239c"]}}` | Returns a set of products                                  |
 | `http://localhost:4000/api/users?sort={"name": 1}`                                  | Returns a list of users sorted by name                  |
 | `http://localhost:4000/api/users?select={"_id": 0}`                                  | Returns a list of users without the _id field           |
-| `http://localhost:4000/api/tasks?skip=60&limit=20`                                   | Returns tasks number from 61 to 80                            |
+| `http://localhost:4000/api/products?skip=60&limit=20`                                   | Returns products number from 61 to 80                            |
 
-**The API should be able to handle any combination of those parameters in a single request**. For example, the following is a valid GET request:
+**The API is also able to handle any combination of those parameters in a single request**. For example, the following is a valid GET request:
 
 ```javascript
 http://localhost:4000/api/users?sort={"name": 1}&skip=60&limit=20
 ```
 
-Here is the User Schema:
+## 5. Frontend implementation
 
-1. "name" - String
-2. "email" - String
-3. "pendingTasks" - [String] - The \_id fields of the *pending* tasks that this user has
-4. "dateCreated" - Date - should be set automatically by server
+#### Access via http://3.145.57.231:3000/
 
-Here is the Task Schema:
+#### Tools/framework
 
-1. "name" - String
-2. "description" - String
-3. "deadline" - Date
-4. "completed" - Boolean
-5. "assignedUser" - String - The \_id field of the user this task is assigned to - default ""
-6. "assignedUserName" - String - The name field of the user this task is assigned to - default "unassigned"
-7. "dateCreated" - Date - should be set automatically by server to present date
+- Use Firebase for user authentication
+- Use React Router for routing
+- Use Axios for API calls
+- Use PropTypes
 
-**We assume that each task can be assigned only to one user.**
+#### Features
 
-#### Requirements
+- **Login page**: where new users can register accounts and existing users can login into their accounts.
+- **User page**: where registered users can see the products they are selling or already sold.
+- **Post page**: where registered users can post products for sell with product name, price, description, and photo.
+- **Gallery view**: that displays all available products for sell. The gallery view also contains filtering attributes where users can search by keywords and sort by price and released date.
+- **Detail view**: when an item in the search view or the gallery view is clicked, the app displays the detailed information of the specific product.
 
-1. Your database should be on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas). It should contain at least 20 users and 100 tasks (about half of which should be completed) (**We provided scripts for you in the database_scripts folder. Read below how to use these scripts**). ***NOTE: Please add "Allow access from anywhere" to your cluster in the IP Whitelist"*** (This is usually not a good practice in real use. Here is just easier for us to grade your mp) 
+#### Routes
 
-2. Responses from your API should be a JSON object with two fields. The first field should be named `message` and should contain a human readable String. The second field should be named `data` and should contain the actual JSON response object. For example, here is a valid response:
+| Page | Actions |
+|----------|---------|
+| login page    | /login        |
+| user page     | /user    |
+| product detail view  | /details/product:id |
+| gallery view      | /         |
+| post page       | /post         |
 
-```javascript
-{
-    "message": "OK",
-    "data": {
-        "_id": "55099652e5993a350458b7b7",
-        "email": "khandek2@illinois.edu",
-        "name": "Sujay Khandekar"
-    }
-}
-```
 
-3. Error responses from your API should also also be a JSON object with a `message` and `data` fields. Messages have to sensible and human readable so that on the client side it can be displayed to the user. Also, it should be independent of the server side technology that you are using. For example, your API should not return an error message directly from Mongoose to the client. For examples of error messages, take a look at the API reference implementation that we have provided.
-
-4. Your API should respond with appropriate [HTTP status codes](http://www.restapitutorial.com/httpstatuscodes.html) for both successful and error responses. You should at least have the following codes: 200 (success), 201 (created), 404 (not found), 500 (server error).
-
-5. You should implement the query string functionality by using the methods provided by Mongoose (as opposed to querying Mongoose for all the results and then doing the filtering/sorting/skipping etc. in your Node/Express application code).
-
-6. Have server side validation for:
-    - Users cannot be created (or updated) without a name or email. All other fields that the user did not specify should be set to reasonable values.
-    - Multiple users with the same email cannot exist.
-    - Tasks cannot be created (or updated) without a name or a deadline. All other fields that the user did not specify should be set to reasonable values.
-
-## 2. Getting Started
+## 6. Getting started locally
 1. Clone the repository:
-`git clone https://gitlab.com/uiuc-web-programming/mp3.git mp3`, then `cd mp3`
-2. Install dependencies:
+`git clone https://gitlab.com/JerryNie/fleaillinois.git fleaillinois`, then `cd fleaillinois`
+2. Install dependencies in both backend and frontend:
 `npm install`
 3. Start the dev server:
 `npm start` or 
 `nodemon --exec node server.js` to automatically restart the server on save.
-
-
-## 3. Tips
-  - Start early!
-  - Please DO NOT delete the `.gitignore file` from the project, you will lose 1% point 
-  - Check out [Postman](https://www.getpostman.com/postman) to your API
-  - Free MongoDB server - [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
-  - You don't need to host anywhere, we will check out your code locally, be sure to run your MongoDB server all the time
-  - The example queries above will cover 70% grade, and another 30% of corner test cases will not be released.
-
-### How to use the DB Scripts
-
-Assuming your API is fully operational (you need to have implement /users and /tasks endpoints for your API), these scripts (in database_scripts/ folder) will populate and clear your database as needed. 
-***NOTE: Use Python3 to run following codes*** 
-
-**dbClean.py**
-
-`python3 dbClean.py -u "localhost" -p 4000 `
-
-You can change "localhost" and the port number to match your own running api server. Leave the quotation marks. DO NOT include "/api/" or "/user" etc.
-
-**dbFill.py**
-
-`python3 dbFill.py -u "localhost" -p 4000 -n 20 -t 100`
-
-Once again, change the url and port number to match your own running api server. You can populate your database with X users and Y tasks (in the above case, 20 and 100 respectively). This will randomly generate users with realistic names and emails as well as realistic tasks. Tasks will have a 50% chance of being completed and a 60% chance of being assigned. If num_tasks >> num_users, users will likely have multiple tasks assigned to them. A task will have one assigned user at most.
-
-**task.txt**
-
-Contains sample task descriptions. Edit if you want, I don't care.  
-
-## Rules
-1. This is an individual assignment. No collaboration is permitted.
-2. It is not permitted to copy/paste code that is not your own. You are, however, free to look at different code sources for inspiration and clarity. All sources (code as well as reading material) that you reference to complete this assignment must be declared in the submission.
-3. If you think something you’re doing might not be acceptable, please ask on Piazza.
-
-
-## Submission Details
-Here's what you will need to submit:
-1. Create a private repository on GitLab. Make sure "Initialize this repository with a README" is not checked.
-2. Change the remote url for the mp3 directory to the url of the new private repository you created.
-```
-git remote rename origin old-origin
-git remote add origin git@gitlab.com:<your-gitlab-username>/mp3.git
-```
-3. Commit and push your local changes to this new repository.
-4. Invite `uiucwp` as a collaborator. This should be as a **reporter**, not as a *guest*, otherwise we can't see your code.
-5. Fill out and submit the form [Submission Form](https://forms.gle/ARkKhDApLCZc6Kgi6)
