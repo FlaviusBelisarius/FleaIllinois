@@ -32,7 +32,7 @@ Based on the assessment as well as considering the user experience, we designed 
 
 - **Message board:** Registered users if interested in the products can leave messages in the message board at the product details page. The sellers can reply and answer any questions accordingly. This functionality offers a seamless interaction between the buyers and the sellers without disturbing the private contact information before making purchase decision. 
 
-- **Responsive Design:** This app has been tested with screen resolutions 1920*1080, 1366*768 and 1280*720. 
+- **Responsive Design:** This app has been tested with screen resolutions 1920 x 1080, 1366 x 768 and 1280 x 720. 
 
 ## 3. User flow
 ![User flow](https://gitlab.com/JerryNie/fleaillinois/-/blob/staging/user_flow.png)
